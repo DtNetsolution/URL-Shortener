@@ -76,7 +76,7 @@ class URLShortener {
 	 * @return string[]
 	 */
 	public function getURLs($sortField, $sortOrder) {
-		$sql = "SELECT * FROM url_map ORDER BY " . $sortField . " " . $sortOrder;
+		$sql = "SELECT * FROM url_map WHERE applicationID = " . $this->application['applicationID'] . " ORDER BY " . $sortField . " " . $sortOrder;
 		$statement = $this->db->query($sql);
 		return $statement->fetchAll();
 	}
