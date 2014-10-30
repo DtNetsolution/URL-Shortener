@@ -57,7 +57,7 @@ class URLShortener {
 	 * @return string
 	 */
 	public function expandURL($shortURL) {
-		$sql = "SELECT longURL FROM url_map WHERE shortURL = " . $this->db->quote($shortURL) . " LIMIT 1";
+		$sql = "SELECT longURL FROM url_map WHERE applicationID = " . $this->application['applicationID'] . " AND shortURL = " . $this->db->quote($shortURL) . " LIMIT 1";
 		$statement = $this->db->query($sql);
 		$row = $statement->fetch();
 
@@ -110,7 +110,7 @@ class URLShortener {
 	 * @return boolean
 	 */
 	public function delete($shortUrlID) {
-		$sql = "DELETE FROM url_map WHERE shortUrlID = " . intval($shortUrlID);
+		$sql = "DELETE FROM url_map WHERE applicationID = " . $this->application['applicationID'] . " AND shortUrlID = " . intval($shortUrlID);
 		return (bool)$this->db->exec($sql);
 	}
 
