@@ -20,24 +20,34 @@ class URLShortener {
 	protected $stripRegex = array();
 
 	/**
+	 * application
+	 *
+	 * @var string
+	 */
+	protected $application = array();
+
+	/**
 	 * Initializes the URL shortener.
 	 */
 	public function __construct() {
-		// connect to database
 		$databaseHost = $databaseDB = $databaseUser = $databasePassword = '';
 		include BASE_DIR . 'config/config.php';
 		$this->db = new PDO('mysql:host=' . $databaseHost . ';dbname=' . $databaseDB, $databaseUser, $databasePassword);
+	}
 
-		// load application
-		$sql = "SELECT * FROM application WHERE domainName = " . $this->db->quote($_SERVER['HTTP_HOST']);
+	/**
+	 * Loads the application
+	 */
+	public function loadApplication() {
+		$sql = "SELECT * FROM application WHERE domainHost = " . $this->db->quote($_SERVER['HTTP_HOST']);
 		$statement = $this->db->query($sql);
 		if (!$statement->rowCount()) {
-			die('Keine Application f&uuml;r die Domain "' . $_SERVER['HTTP_HOST'] . '" gefunden');
+			die('Keine Application f&uuml;r die Domain "' . $_SERVER['HTTP_HOST'] . '" gefunden.');
 		}
 
 		// store application
 		$this->application = $statement->fetch();
-		define('SERVICE_BASEURL', 'http://' . $this->application['domainName'] . $this->application['domainPath']);
+		define('SERVICE_BASEURL', 'http://' . $this->application['domainHost'] . $this->application['domainPath']);
 	}
 
 	/**

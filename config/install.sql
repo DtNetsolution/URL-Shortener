@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS application (
   applicationID INT          NOT NULL AUTO_INCREMENT,
-  domainName    VARCHAR(255) NOT NULL DEFAULT 'localhost',
+  domainHost    VARCHAR(255) NOT NULL DEFAULT 'localhost',
   domainPath    VARCHAR(255) NOT NULL DEFAULT '/',
 
   PRIMARY KEY (applicationID)
