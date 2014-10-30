@@ -32,10 +32,10 @@ class UrlListPage extends AbstractPage {
 		$this->readParameters();
 		$this->readData();
 		if (isset($_GET['deleted'])) {
-			$this->show('deleted');
+			$this->show('urlDeleted');
 		}
 
-		$this->show('list');
+		$this->show('urlList');
 		$this->show('footer');
 	}
 

@@ -34,7 +34,7 @@ class UrlCreateForm extends AbstractPage {
 			$this->validateParameters() && $this->save();
 		}
 
-		$this->show('create');
+		$this->show('urlCreate');
 		$this->show('footer');
 	}
 
@@ -82,7 +82,7 @@ class UrlCreateForm extends AbstractPage {
 	protected function save() {
 		$shortURL = $this->urlShortener->save($this->longURL, $this->shortURL);
 
-		$this->show('saved', $shortURL);
+		$this->show('urlSaved', $shortURL);
 		$this->longURL = $this->shortURL = '';
 	}
 }
