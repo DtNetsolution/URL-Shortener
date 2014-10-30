@@ -1,6 +1,6 @@
 <?php
 define('BASE_DIR', dirname(dirname(__FILE__)) . '/');
-require_once BASE_DIR . 'src/CreateForm.class.php';
+require_once BASE_DIR . 'src/url/UrlCreateForm.class.php';
 
-$form = new CreateForm();
+$form = new UrlCreateForm();
 $form->run();

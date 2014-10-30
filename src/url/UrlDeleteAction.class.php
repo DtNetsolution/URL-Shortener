@@ -7,7 +7,7 @@ require_once BASE_DIR . 'src/AbstractPage.class.php';
  * @author    Magnus Kühn
  * @copyright 2013-2014 Magnus Kühn
  */
-class DeleteAction extends AbstractPage {
+class UrlDeleteAction extends AbstractPage {
 	/**
 	 * Runs the page.
 	 */

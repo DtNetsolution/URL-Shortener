@@ -7,7 +7,7 @@ require_once BASE_DIR . 'src/AbstractPage.class.php';
  * @author    Magnus Kühn
  * @copyright 2013-2014 Magnus Kühn
  */
-class CreateForm extends AbstractPage {
+class UrlCreateForm extends AbstractPage {
 	/**
 	 * @var string
 	 */

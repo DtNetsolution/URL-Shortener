@@ -1,6 +1,6 @@
 <?php
 define('BASE_DIR', dirname(dirname(__FILE__)) . '/');
-require_once BASE_DIR . 'src/ListPage.class.php';
+require_once BASE_DIR . 'src/url/UrlListPage.class.php';
 
-$page = new ListPage();
+$page = new UrlListPage();
 $page->run();
