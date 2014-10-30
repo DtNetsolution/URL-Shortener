@@ -11,12 +11,32 @@ class UrlCreateForm extends AbstractPage {
 	/**
 	 * @var string
 	 */
-	protected $longURL = null;
+	protected $longURL = '';
 
 	/**
 	 * @var string
 	 */
-	protected $shortURL = null;
+	protected $shortURL = '';
+
+	/**
+	 * @var int
+	 */
+	protected $expire = 0;
+
+	/**
+	 * @var string
+	 */
+	protected $details = '';
+
+	/**
+	 * @var bool
+	 */
+	protected $protect = false;
+
+	/**
+	 * @var string
+	 */
+	protected $action = 'create';
 
 	/**
 	 * @var string[]
@@ -42,16 +62,17 @@ class UrlCreateForm extends AbstractPage {
 	 * Reads parameters for the form.
 	 */
 	protected function readParameters() {
-		if (isset($_REQUEST['longURL'])) {
-			$this->longURL = $_REQUEST['longURL'];
-		}
-		if (isset($_REQUEST['shortURL'])) {
-			$this->shortURL = $_REQUEST['shortURL'];
-		}
+		if (isset($_REQUEST['longURL'])) $this->longURL = $_REQUEST['longURL'];
+		if (isset($_REQUEST['shortURL'])) $this->shortURL = $_REQUEST['shortURL'];
+		if (isset($_REQUEST['expire'])) $this->expire = intval($_REQUEST['expire']);
+		if (isset($_REQUEST['details'])) $this->details = $_REQUEST['details'];
+		if (isset($_REQUEST['protect'])) $this->protect = true;
 	}
 
 	/**
 	 * Validates parameters for the form.
+	 *
+	 * @return bool
 	 */
 	protected function validateParameters() {
 		// fix long URL
@@ -67,6 +88,15 @@ class UrlCreateForm extends AbstractPage {
 		}
 
 		// validate short URL
+		return $this->validateShortUrl();
+	}
+
+	/**
+	 * Validates the short url.
+	 *
+	 * @return bool
+	 */
+	protected function validateShortUrl() {
 		$longURL = $this->urlShortener->expandURL($this->shortURL);
 		if ($longURL) {
 			$this->error = array('field' => 'shortURL', 'error' => 'taken', 'url' => $longURL);
@@ -80,9 +110,11 @@ class UrlCreateForm extends AbstractPage {
 	 * Saves the form.
 	 */
 	protected function save() {
-		$shortURL = $this->urlShortener->save($this->longURL, $this->shortURL);
+		$shortURL = $this->urlShortener->save($this->longURL, $this->shortURL, $this->expire, $this->details, $this->protect);
 
 		$this->show('urlSaved', $shortURL);
-		$this->longURL = $this->shortURL = '';
+		$this->longURL = $this->shortURL = $this->details = '';
+		$this->expire = 0;
+		$this->protect = false;
 	}
 }

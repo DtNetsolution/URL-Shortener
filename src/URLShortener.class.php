@@ -86,9 +86,12 @@ class URLShortener {
 	 *
 	 * @param string $longURL
 	 * @param string $shortURL
+	 * @param int    $expire
+	 * @param string $details
+	 * @param bool   $protect
 	 * @return string
 	 */
-	public function save($longURL, $shortURL = null) {
+	public function save($longURL, $shortURL = null, $expire = 0, $details, $protect) {
 		if (!$shortURL) {
 			do {
 				$shortURL = mt_rand(11111, 99999);
@@ -96,8 +99,10 @@ class URLShortener {
 		}
 
 		$user = (isset($_SERVER['PHP_AUTH_USER']) ? $_SERVER['PHP_AUTH_USER'] : '');
-		$sql = "INSERT INTO url_map (applicationID, longURL, shortURL, creator, createdTime) VALUES
-			(" . $this->application['applicationID'] . ", " . $this->db->quote($longURL) . ", " . $this->db->quote($shortURL) . ", " . $this->db->quote($user) . ", " . time() . ")";
+		$sql = "INSERT INTO url_map (applicationID, longURL, shortURL, creator, createdTime, expire, details, protect) VALUES
+			(" . $this->application['applicationID'] . ", " . $this->db->quote($longURL) . ", " . $this->db->quote($shortURL) . ", " . $this->db->quote($user) . ", " .
+			time() . ", " . ($expire > 0 ? time() + $expire * 24 * 60 * 60 : 'Null') . ", " . $this->db->quote($details) . ", " . ($protect ? 1 : 0) . ")";
+		var_dump($sql);
 		$this->db->query($sql);
 
 		return self::expandShortURL($shortURL);

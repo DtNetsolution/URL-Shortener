@@ -27,7 +27,7 @@
 					<?php } ?>
 				</th>
 				<th>
-					<a href="<?php echo SERVICE_BASEURL; ?>admin/list.php?sortField=createdTime">Zeitpunk</a>
+					<a href="<?php echo SERVICE_BASEURL; ?>admin/list.php?sortField=createdTime">Zeitpunkt</a>
 					<?php if ($this->sortField == 'createdTime') { ?>
 						<span class="glyphicon glyphicon-sort-by-attributes-alt"></span>
 					<?php } ?>

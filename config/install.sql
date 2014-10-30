@@ -13,6 +13,9 @@ CREATE TABLE IF NOT EXISTS url_map (
   longUrl       VARCHAR(1024)    NOT NULL,
   creator       VARCHAR(50)      NOT NULL,
   createdTime   INT(15) UNSIGNED NOT NULL,
+  expire        INT              NULL DEFAULT NULL,
+  details       MEDIUMTEXT       NOT NULL,
+  protect       TINYINT          NOT NULL DEFAULT 0,
 
   PRIMARY KEY (shortUrlID),
   UNIQUE INDEX (applicationID, shortUrl)
