@@ -3,7 +3,7 @@
 // check for existing config
 define('BASE_DIR', dirname(dirname(__FILE__)) . '/');
 if (file_exists(BASE_DIR . 'config/config.php')) {
-	header('Location: list.php');
+	header('Location: index.php');
 	exit;
 }
 
