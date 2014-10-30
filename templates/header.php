@@ -1,9 +1,22 @@
 <html lang="de">
 	<head>
 		<title>URL Shortener</title>
+
 		<link href="<?php echo SERVICE_BASEURL; ?>assets/css/bootstrap.min.css" rel="stylesheet">
+		<style type="text/css">
+			.glyphicon {
+				color: #000;
+				text-decoration: none !important;
+			}
+
+			.small-column {
+				width: 1px !important;
+				white-space: nowrap;
+				overflow: hidden;
+			}
+		</style>
 	</head>
-	
+
 	<body>
 		<header class="navbar navbar-inverse">
 			<div class="container">

@@ -2,7 +2,7 @@
 	<table class="table table-hover table-condensed">
 		<thead>
 			<tr>
-				<th colspan="2">
+				<th class="small-column" colspan="2">
 					<a href="<?php echo SERVICE_BASEURL; ?>admin/list.php?sortField=shortUrlID">ID</a>
 					<?php if ($this->sortField == 'shortUrlID') { ?>
 						<span class="glyphicon glyphicon-sort-by-alphabet"></span>
@@ -14,19 +14,19 @@
 						<span class="glyphicon glyphicon-sort-by-alphabet"></span>
 					<?php } ?>
 				</th>
-				<th>
+				<th class="small-column">
 					<a href="<?php echo SERVICE_BASEURL; ?>admin/list.php?sortField=shortUrl">Kurze URL</a>
 					<?php if ($this->sortField == 'shortUrl') { ?>
 						<span class="glyphicon glyphicon-sort-by-alphabet"></span>
 					<?php } ?>
 				</th>
-				<th>
+				<th class="small-column">
 					<a href="<?php echo SERVICE_BASEURL; ?>admin/list.php?sortField=creator">Ersteller</a>
 					<?php if ($this->sortField == 'creator') { ?>
 						<span class="glyphicon glyphicon-sort-by-alphabet"></span>
 					<?php } ?>
 				</th>
-				<th>
+				<th class="small-column">
 					<a href="<?php echo SERVICE_BASEURL; ?>admin/list.php?sortField=createdTime">Zeitpunkt</a>
 					<?php if ($this->sortField == 'createdTime') { ?>
 						<span class="glyphicon glyphicon-sort-by-attributes-alt"></span>
@@ -37,21 +37,20 @@
 		<tbody>
 			<?php foreach ($this->urls as $url) { ?>
 				<tr>
-					<td><?php echo $url['shortUrlID']; ?></td>
-					<td>
+					<td class="small-column"><?php echo $url['shortUrlID']; ?></td>
+					<td class="small-column">
 						<a href="<?php echo SERVICE_BASEURL; ?>admin/delete.php?id=<?php echo $url['shortUrlID']; ?>"
 						   data-short-url="<?php echo URLShortener::expandShortURL($url['shortUrl']); ?>"
-						   class="glyphicon glyphicon-remove" title="L&ouml;schen"
-						   style="color: #000; text-decoration: none !important;"></a>
+						   class="glyphicon glyphicon-remove" title="L&ouml;schen"></a>
 					</td>
 					<td><a href="<?php echo $url['longUrl']; ?>" target="blank"><?php echo $url['longUrl']; ?></a></td>
-					<td>
+					<td class="small-column">
 						<a href="<?php echo URLShortener::expandShortURL($url['shortUrl']); ?>" target="blank">
 							<?php echo $url['shortUrl']; ?>
 						</a>
 					</td>
-					<td><?php echo $url['creator']; ?></td>
-					<td style="white-space: nowrap; overflow: hidden;"><?php echo date('Y-m-d H:i:s', $url['createdTime']); ?></td>
+					<td class="small-column"><?php echo $url['creator']; ?></td>
+					<td class="small-column"><?php echo date('Y-m-d H:i:s', $url['createdTime']); ?></td>
 				</tr>
 			<?php } ?>
 		</tbody>
