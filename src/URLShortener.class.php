@@ -36,13 +36,13 @@ class URLShortener {
 	}
 
 	/**
-	 * Loads the application
+	 * Loads the current application.
 	 */
 	public function loadApplication() {
 		$sql = "SELECT * FROM application WHERE domainHost = " . $this->db->quote($_SERVER['HTTP_HOST']);
 		$statement = $this->db->query($sql);
 		if (!$statement->rowCount()) {
-			die('Keine Application f&uuml;r die Domain "' . $_SERVER['HTTP_HOST'] . '" gefunden.');
+			die('Keine Application f&uuml;r die Domain "' . $_SERVER['HTTP_HOST'] . '".');
 		}
 
 		// store application
