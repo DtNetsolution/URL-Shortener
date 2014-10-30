@@ -25,7 +25,7 @@ class DeleteAction extends AbstractPage {
 		if (!empty($_GET['id'])) {
 			$id = intval($_GET['id']);
 			if (!empty($id) && $this->urlShortener->delete($id)) {
-				header('Location: ' . SERVICE_BASEURL . 'admin/index.php?deleted');
+				header('Location: ' . SERVICE_BASEURL . 'admin/?deleted');
 				exit;
 			}
 		}

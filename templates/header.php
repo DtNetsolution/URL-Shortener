@@ -16,7 +16,7 @@
 							<a href="<?php echo SERVICE_BASEURL; ?>admin/create.php">URL Verk&uuml;rzen</a>
 						</li>
 						<li<?php if ($parameter == 'list') echo ' class="active"'; ?>>
-							<a href="<?php echo SERVICE_BASEURL; ?>admin/index.php">Verk&uuml;rzte URLs</a>
+							<a href="<?php echo SERVICE_BASEURL; ?>admin/">Verk&uuml;rzte URLs</a>
 						</li>
 						<li>
 							<a href="<?php echo str_replace('://', '://go:go@', SERVICE_BASEURL); ?>admin/create.php">Abmelden</a>
