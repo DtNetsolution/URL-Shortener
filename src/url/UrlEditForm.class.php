@@ -25,7 +25,7 @@ class UrlEditForm extends UrlCreateForm {
 	public function run() {
 		// read mapping
 		if (isset($_REQUEST['id'])) {
-			$this->urlMapping = $this->urlShortener->getUrlMapping(intval($_REQUEST['id']));
+			$this->urlMapping = $this->urlShortener->getShortUrl(intval($_REQUEST['id']));
 		}
 
 		// redirect to create if invalid

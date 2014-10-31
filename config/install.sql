@@ -25,7 +25,6 @@ CREATE TABLE IF NOT EXISTS user (
   userID   INT                   NOT NULL AUTO_INCREMENT,
   username VARCHAR(255)          NOT NULL,
   password VARCHAR(255)          NOT NULL,
-  salt     VARCHAR(255)          NOT NULL,
   role     ENUM('admin', 'user') NOT NULL DEFAULT 'user',
 
   PRIMARY KEY (userID),

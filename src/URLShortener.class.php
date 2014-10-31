@@ -52,7 +52,7 @@ class UrlShortener {
 			$statement = $this->db->query($sql);
 			$user = $statement->fetch();
 
-			if ($user && $user['password'] == self::getHash($_SERVER['PHP_AUTH_PW'], $user['salt'])) {
+			if ($user && crypt($_SERVER['PHP_AUTH_PW'], $user['password']) == $user['password']) {
 				$this->user = $user;
 			}
 		}
@@ -87,7 +87,7 @@ class UrlShortener {
 	 * @param int $shortUrlID
 	 * @return null|string[]
 	 */
-	public function getUrlMapping($shortUrlID) {
+	public function getShortUrl($shortUrlID) {
 		$sql = "SELECT * FROM short_url WHERE applicationID = " . $this->application['applicationID'] . " AND shortUrlID = " . $shortUrlID . " LIMIT 1";
 		$statement = $this->db->query($sql);
 		return $statement->fetch();
@@ -209,16 +209,5 @@ class UrlShortener {
 	 */
 	public static function expandShortUrl($shortUrl) {
 		return SERVICE_BASEURL . '?' . $shortUrl;
-	}
-
-	/**
-	 * Returns the password hash.
-	 *
-	 * @param string $password
-	 * @param string $salt
-	 * @return string
-	 */
-	public static function getHash($password, $salt) {
-		return crypt(crypt($password, $salt), $salt);
 	}
 }
