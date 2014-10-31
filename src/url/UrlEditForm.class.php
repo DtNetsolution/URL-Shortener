@@ -56,6 +56,12 @@ class UrlEditForm extends UrlCreateForm {
 	 * @return bool
 	 */
 	protected function validateShortUrl() {
+		if (!$this->shortUrl) {
+			$this->error = array('field' => 'shortUrl', 'error' => 'invalid');
+			return false;
+		}
+
+		// only check if its unique when it was changed
 		if ($this->shortUrl != $this->urlMapping['shortUrl']) {
 			return parent::validateShortUrl();
 		}

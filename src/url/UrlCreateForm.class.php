@@ -112,8 +112,8 @@ class UrlCreateForm extends AbstractPage {
 	protected function save() {
 		if (!$this->shortUrl) {
 			do {
-				$shortUrl = mt_rand(11111, 99999);
-			} while ($this->urlShortener->expandUrl($shortUrl));
+				$this->shortUrl = mt_rand(11111, 99999);
+			} while ($this->urlShortener->expandUrl($this->shortUrl));
 		}
 
 		$sql = "INSERT INTO short_url (applicationID, longUrl, shortUrl, userID, createdTime, expire, details, protected) VALUES

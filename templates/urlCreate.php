@@ -29,11 +29,11 @@
 						       class="form-control"/>
 					</div>
 				</div>
-				<?php if ($this->error['field'] == 'shortUrl') { ?>
+				<?php if ($this->error['field'] == 'shortUrl' && $this->error['error'] == 'taken') { ?>
 					<span class="help-block">Diese kurze URL wird bereits f&uuml;r <a
 							href="<?php echo $this->error['url']; ?>"><?php echo $this->error['url']; ?></a> verwendet.</span>
 				<?php } else { ?>
-					<span class="help-block">Geben Sie optional die gew&uuml;nschte URL ein.</span>
+					<span class="help-block">Geben Sie die gew&uuml;nschte kurze URL ein.</span>
 				<?php } ?>
 			</div>
 		</div>
