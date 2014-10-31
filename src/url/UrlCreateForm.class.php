@@ -47,7 +47,7 @@ class UrlCreateForm extends AbstractPage {
 	 * Runs the page.
 	 */
 	public function run() {
-		$this->show('header', 'create');
+		$this->show('header', 'urlCreate');
 
 		if (!empty($_POST)) {
 			$this->readParameters();

@@ -27,7 +27,7 @@ class UrlListPage extends AbstractPage {
 	 * Runs the page.
 	 */
 	public function run() {
-		$this->show('header', 'list');
+		$this->show('header', 'urlList');
 
 		$this->readParameters();
 		$this->readData();

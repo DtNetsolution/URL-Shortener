@@ -1,4 +1,6 @@
-<?php if (count($this->urls)) { ?>
+<?php
+/** @var $this UrlListPage */
+if (count($this->urls)) { ?>
 	<table class="table table-hover table-condensed">
 		<thead>
 			<tr>
@@ -39,14 +41,14 @@
 				<tr>
 					<td class="small-column"><?php echo $url['shortUrlID']; ?></td>
 					<td class="small-column">
-						<a href="<?php echo SERVICE_BASEURL; ?>admin/edit.php?id=<?php echo $url['shortUrlID']; ?>"
+						<a href="<?php echo SERVICE_BASEURL; ?>admin/urlEdit.php?id=<?php echo $url['shortUrlID']; ?>"
 						   class="glyphicon glyphicon-pencil" title="Bearbeiten"></a>
 
 						<?php if($url['protected']) { ?>
 							<span class="glyphicon glyphicon-lock" title="Gesch&ouml;tzt"></span>
 						<?php } else { ?>
-							<a href="<?php echo SERVICE_BASEURL; ?>admin/delete.php?id=<?php echo $url['shortUrlID']; ?>"
-							   data-short-url="<?php echo UrlShortener::expandShortUrl($url['shortUrl']); ?>"
+							<a href="<?php echo SERVICE_BASEURL; ?>admin/urlDelete.php?id=<?php echo $url['shortUrlID']; ?>"
+							   data-detail="<?php echo UrlShortener::expandShortUrl($url['shortUrl']); ?>"
 							   class="glyphicon glyphicon-remove" title="L&ouml;schen"></a>
 						<?php } ?>
 					</td>
@@ -71,7 +73,7 @@
 					<h4 class="modal-title">Best&auml;tigung erforderlich</h4>
 				</div>
 				<div class="modal-body">
-					M&ouml;chten Sie den kurzen Link &raquo;<a id="shortLink" target="blank"></a>&laquo; wirklich l&ouml;schen?
+					M&ouml;chten Sie den kurzen Link &raquo;<span id="confirmRemoveDetail"></span>&laquo; wirklich l&ouml;schen?
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Schlie&szlig;en</button>

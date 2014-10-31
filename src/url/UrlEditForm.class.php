@@ -30,7 +30,7 @@ class UrlEditForm extends UrlCreateForm {
 
 		// redirect to create if invalid
 		if (!$this->urlMapping) {
-			header('Location: ' . SERVICE_BASEURL . '/admin/create.php');
+			header('Location: ' . SERVICE_BASEURL . '/admin/urlCreate.php');
 			exit;
 		}
 

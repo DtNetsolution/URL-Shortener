@@ -8,6 +8,11 @@
  */
 class UrlShortener {
 	/**
+	 * @var string[]
+	 */
+	public static $roles = array('admin' => 'Administrator', 'user' => 'Benutzer');
+
+	/**
 	 * @var PDO
 	 */
 	protected $db;
@@ -64,6 +69,15 @@ class UrlShortener {
 			echo 'Authentication Required';
 			exit;
 		}
+	}
+
+	/**
+	 * Returns the user role
+	 *
+	 * @return string
+	 */
+	public function getRole() {
+		return (isset($this->user['role']) ? $this->user['role'] : 'user');
 	}
 
 	/**
@@ -138,6 +152,7 @@ class UrlShortener {
 		if (!$shortUrl) {
 			do {
 				$shortUrl = mt_rand(11111, 99999);
+				return $shortUrl;
 			} while ($this->expandUrl($shortUrl));
 		}
 
@@ -158,7 +173,6 @@ class UrlShortener {
 	 * @param int    $expire
 	 * @param string $details
 	 * @param bool   $protected
-	 * @return string
 	 */
 	public function updateUrl($shortUrlID, $longUrl, $shortUrl, $expire, $details, $protected) {
 		$sql = "UPDATE short_url SET longUrl = " . $this->db->quote($longUrl) . ", shortUrl = " . $this->db->quote($shortUrl) . ", expire = " . $expire .
@@ -199,6 +213,15 @@ class UrlShortener {
 	 */
 	public function addStripRegex($regex) {
 		$this->stripRegex[] = $regex;
+	}
+
+	/**
+	 * Fetches a list of all users.
+	 */
+	public function getUsers() {
+		$sql = "SELECT * FROM user ORDER BY role ASC, username ASC";
+		$statement = $this->db->query($sql);
+		return $statement->fetchAll();
 	}
 
 	/**

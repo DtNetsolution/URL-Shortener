@@ -285,7 +285,7 @@
 		var $object = $(event.currentTarget);
 
 		lastUrl = $object.attr('href');
-		$('#shortLink').text($object.data('short-url')).attr('href', $object.data('short-url'));
+		$('#confirmRemoveDetail').text($object.data('detail'));
 		$('#confirmRemove').modal();
 	};
 

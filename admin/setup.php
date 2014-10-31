@@ -20,7 +20,6 @@ if (isset($_POST['databaseHost']) && isset($_POST['databaseDB']) && isset($_POST
 		$pdo->exec('INSERT INTO application (domainHost, domainPath) VALUES ("' . $_POST['domainHost'] . '", "' . $_POST['domainPath'] . '")');
 
 		// create user
-//		$salt = crypt(microtime());
 		$pdo->exec('INSERT INTO user (username, password, role) VALUES ("' . $_POST['username'] . '", "' . crypt($_POST['password']) .'", "admin")');
 
 		// write config
@@ -32,7 +31,7 @@ $databaseUser = \'' . $_POST['databaseUser'] . '\';
 $databasePassword = \'' . $_POST['databasePassword'] . '\';');
 
 		// redirect to application setup
-		header('Location: create.php');
+		header('Location: urlCreate.php');
 		exit;
 	} catch (PDOException $e) {
 	}

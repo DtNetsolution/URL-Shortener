@@ -18,6 +18,11 @@
 				white-space: nowrap;
 				overflow: hidden;
 			}
+
+			th {
+				white-space: nowrap;
+				overflow: hidden;
+			}
 		</style>
 	</head>
 
@@ -29,14 +34,24 @@
 				</div>
 				<nav>
 					<ul class="nav navbar-nav">
-						<li<?php if ($parameter == 'create') echo ' class="active"'; ?>>
-							<a href="<?php echo SERVICE_BASEURL; ?>admin/create.php">URL Verk&uuml;rzen</a>
+						<li<?php if ($parameter == 'urlCreate') echo ' class="active"'; ?>>
+							<a href="<?php echo SERVICE_BASEURL; ?>admin/urlCreate.php">URL Verk&uuml;rzen</a>
 						</li>
-						<li<?php if ($parameter == 'list') echo ' class="active"'; ?>>
+						<li<?php if ($parameter == 'urlList') echo ' class="active"'; ?>>
 							<a href="<?php echo SERVICE_BASEURL; ?>admin/">Verk&uuml;rzte URLs</a>
 						</li>
+
+						<?php if ($this->urlShortener->getRole() == 'admin') { ?>
+							<li<?php if ($parameter == 'userCreate') echo ' class="active"'; ?>>
+								<a href="<?php echo SERVICE_BASEURL; ?>admin/userCreate.php">Benutzer Erstellen</a>
+							</li>
+							<li<?php if ($parameter == 'userList') echo ' class="active"'; ?>>
+								<a href="<?php echo SERVICE_BASEURL; ?>admin/userList.php">Benutzer Auflisten</a>
+							</li>
+						<?php }	?>
+
 						<li>
-							<a href="<?php echo str_replace('://', '://go:go@', SERVICE_BASEURL); ?>admin/create.php">Abmelden</a>
+							<a href="<?php echo str_replace('://', '://go:go@', SERVICE_BASEURL); ?>admin/urlCreate.php">Abmelden</a>
 						</li>
 					</ul>
 				</nav>

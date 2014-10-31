@@ -1,5 +1,5 @@
 <?php /** @var $this UrlEditForm */ ?>
-<form action="<?php echo SERVICE_BASEURL.'admin/'.($this->action == 'create' ? 'create.php' : 'edit.php?id='.$this->urlMapping['shortUrlID']); ?>" method="post" class="form-horizontal">
+<form action="<?php echo SERVICE_BASEURL.'admin/'.($this->action == 'create' ? 'urlCreate.php' : 'urlEdit.php?id='.$this->urlMapping['shortUrlID']); ?>" method="post" class="form-horizontal">
 	<fieldset>
 		<legend>Allgemeine Informationen</legend>
 
