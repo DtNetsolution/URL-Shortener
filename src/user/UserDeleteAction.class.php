@@ -1,0 +1,34 @@
+<?php
+require_once BASE_DIR . 'src/AbstractPage.class.php';
+
+/**
+ * Deletes an user.
+ *
+ * @author    Magnus Kühn
+ * @copyright 2013-2014 Magnus Kühn
+ */
+class UserDeleteAction extends AbstractPage {
+	/**
+	 * Runs the page.
+	 */
+	public function run() {
+		$this->execute();
+
+		header('Location: ' . SERVICE_BASEURL . 'admin/userList.php');
+		exit;
+	}
+
+	/**
+	 * Executes the action.
+	 */
+	public function execute() {
+		if (!empty($_GET['id'])) {
+			$sql = "DELETE FROM user
+					WHERE   userID = " . intval(intval($_GET['id']));
+			$this->urlShortener->getDB()->query($sql);
+
+			header('Location: ' . SERVICE_BASEURL . 'admin/userList.php?deleted');
+			exit;
+		}
+	}
+}

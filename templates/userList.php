@@ -15,7 +15,7 @@
 					<a href="<?php echo SERVICE_BASEURL; ?>admin/userEdit.php?id=<?php echo $user['userID']; ?>"
 					   class="glyphicon glyphicon-pencil" title="Bearbeiten"></a>
 					<a href="<?php echo SERVICE_BASEURL; ?>admin/userDelete.php?id=<?php echo $user['userID']; ?>"
-					   data-short-url="<?php echo UrlShortener::expandShortUrl($user['userID']); ?>"
+					   data-detail="<?php echo $user['username']; ?>"
 					   class="glyphicon glyphicon-remove" title="L&ouml;schen"></a>
 				</td>
 
@@ -33,7 +33,7 @@
 				<h4 class="modal-title">Best&auml;tigung erforderlich</h4>
 			</div>
 			<div class="modal-body">
-				M&ouml;chten Sie den Benutzer &raquo;<a id="shortLink" target="blank"></a>&laquo; wirklich l&ouml;schen?
+				M&ouml;chten Sie den Benutzer &raquo;<span id="confirmRemoveDetail"></span>&laquo; wirklich l&ouml;schen?
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Schlie&szlig;en</button>
