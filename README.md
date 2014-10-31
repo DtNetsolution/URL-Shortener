@@ -11,10 +11,10 @@ Einrichtung
 3. Zugangsdaten für die Datenbank eingeben. Der Benutzer muss Tabellen erzeugen können.
 4. Den Domain Host und Pfad eingeben. Beispiel:
 	- `http://go.dtnet.de/`: Host `go.dtnet.de`, Pfad `/`
-	- `http://www.softwaredemo.de/url-shortener/`: Host `www.softwaredemo.de`, Pfad `/url-shortener`
+	- `http://www.softwaredemo.de/url-shortener/`: Host `www.softwaredemo.de`, Pfad `/url-shortener/`
 5. Das Formular absenden
 
-Um mehrere Instanzen zu betreiben, müssen alle URLs auf den selben Ordner mit dem PHP-Code zugreifen. Danach wird automatisch je nach Instanz unterschieden. 
+Um mehrere Instanzen zu betreiben, müssen alle URLs auf den selben Ordner mit dem PHP-Code zugreifen. Danach werden automatisch die Instanzen unterschieden. Neue Instanzen müssen manuell in der Tabelle `application` angelegt werden. 
 
 **Hinweis:** Es kann nur eine Instanz pro Domain Host betrieben werden.
 

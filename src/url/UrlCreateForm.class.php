@@ -49,7 +49,7 @@ class UrlCreateForm extends AbstractPage {
 	public function run() {
 		$this->show('header', 'create');
 
-		if (!empty($_REQUEST)) {
+		if (!empty($_POST)) {
 			$this->readParameters();
 			$this->validateParameters() && $this->save();
 		}
@@ -62,11 +62,11 @@ class UrlCreateForm extends AbstractPage {
 	 * Reads parameters for the form.
 	 */
 	protected function readParameters() {
-		if (isset($_REQUEST['longURL'])) $this->longURL = $_REQUEST['longURL'];
-		if (isset($_REQUEST['shortURL'])) $this->shortURL = $_REQUEST['shortURL'];
-		if (isset($_REQUEST['expire'])) $this->expire = intval($_REQUEST['expire']);
-		if (isset($_REQUEST['details'])) $this->details = $_REQUEST['details'];
-		if (isset($_REQUEST['protect'])) $this->protect = true;
+		if (isset($_POST['longURL'])) $this->longURL = $_POST['longURL'];
+		if (isset($_POST['shortURL'])) $this->shortURL = $_POST['shortURL'];
+		if (isset($_POST['expire'])) $this->expire = intval($_POST['expire']);
+		if (isset($_POST['details'])) $this->details = $_POST['details'];
+		if (isset($_POST['protect'])) $this->protect = true;
 	}
 
 	/**
@@ -110,7 +110,7 @@ class UrlCreateForm extends AbstractPage {
 	 * Saves the form.
 	 */
 	protected function save() {
-		$shortURL = $this->urlShortener->save($this->longURL, $this->shortURL, $this->expire, $this->details, $this->protect);
+		$shortURL = $this->urlShortener->createUrl($this->longURL, $this->shortURL, $this->expire, $this->details, $this->protect);
 
 		$this->show('urlSaved', $shortURL);
 		$this->longURL = $this->shortURL = $this->details = '';

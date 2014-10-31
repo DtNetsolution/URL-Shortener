@@ -1,4 +1,4 @@
-<form action="<?php echo SERVICE_BASEURL; ?>admin/create.php" method="post" class="form-horizontal">
+<form action="<?php echo SERVICE_BASEURL.'admin/'.($this->action == 'create' ? 'create.php' : 'edit.php?id='.$this->urlMapping['shortUrlID']); ?>" method="post" class="form-horizontal">
 	<fieldset>
 		<legend>Allgemeine Informationen</legend>
 
@@ -39,9 +39,7 @@
 
 		<div class="form-group">
 			<div class="col-lg-offset-2 col-lg-10">
-				<input type="submit"
-				       value="<?php echo($this->action == 'create' ? 'URL Verk&uuml;rzen' : 'Aktualisieren') ?>"
-				       class="btn btn-primary"/>
+				<input type="submit" value="<?php echo($this->action == 'create' ? 'URL Verk&uuml;rzen' : 'Aktualisieren') ?>" class="btn btn-primary"/>
 			</div>
 		</div>
 	</fieldset>
@@ -89,7 +87,7 @@
 
 		<div class="form-group">
 			<div class="col-lg-offset-2 col-lg-10">
-				<input type="submit" value="URL Verk&uuml;rzen" class="btn btn-primary"/>
+				<input type="submit" value="<?php echo($this->action == 'create' ? 'URL Verk&uuml;rzen' : 'Aktualisieren') ?>" class="btn btn-primary"/>
 			</div>
 		</div>
 	</fieldset>
