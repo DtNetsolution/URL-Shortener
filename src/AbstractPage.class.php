@@ -18,6 +18,7 @@ abstract class AbstractPage {
 	 */
 	public function __construct() {
 		$this->urlShortener = new UrlShortener();
+		$this->urlShortener->loadUser();
 		$this->urlShortener->loadApplication();
 	}
 

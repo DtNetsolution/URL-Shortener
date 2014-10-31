@@ -20,7 +20,14 @@ class UrlShortener {
 	protected $stripRegex = array();
 
 	/**
-	 * application
+	 * current user
+	 *
+	 * @var string[]
+	 */
+	protected $user = array();
+
+	/**
+	 * current application
 	 *
 	 * @var string
 	 */
@@ -33,6 +40,30 @@ class UrlShortener {
 		$databaseHost = $databaseDB = $databaseUser = $databasePassword = '';
 		include BASE_DIR . 'config/config.php';
 		$this->db = new PDO('mysql:host=' . $databaseHost . ';dbname=' . $databaseDB, $databaseUser, $databasePassword);
+	}
+
+	/**
+	 * Loads the current user and requests credentials if necessary.
+	 */
+	public function loadUser() {
+		// validate credentials
+		if (isset($_SERVER['PHP_AUTH_USER']) && isset($_SERVER['PHP_AUTH_PW'])) {
+			$sql = "SELECT * FROM user WHERE username = " . $this->db->quote($_SERVER['PHP_AUTH_USER']);
+			$statement = $this->db->query($sql);
+			$user = $statement->fetch();
+
+			if ($user && $user['password'] == self::getHash($_SERVER['PHP_AUTH_PW'], $user['salt'])) {
+				$this->user = $user;
+			}
+		}
+
+		// ask for credentials if no user
+		if (!$this->user) {
+			header('WWW-Authenticate: Basic realm="URL Shortener Login"');
+			header('HTTP/1.0 401 Unauthorized');
+			echo 'Authentication Required';
+			exit;
+		}
 	}
 
 	/**
@@ -51,7 +82,7 @@ class UrlShortener {
 	}
 
 	/**
-	 * Fetches an url mapping
+	 * Fetches a short url.
 	 *
 	 * @param int $shortUrlID
 	 * @return null|string[]
@@ -77,20 +108,24 @@ class UrlShortener {
 	}
 
 	/**
-	 * Fetches a list of all Urls.
+	 * Fetches a list of all urls.
 	 *
 	 * @param string $sortField
 	 * @param string $sortOrder
 	 * @return string[]
 	 */
 	public function getUrls($sortField, $sortOrder) {
-		$sql = "SELECT * FROM short_url WHERE applicationID = " . $this->application['applicationID'] . " ORDER BY " . $sortField . " " . $sortOrder;
+		$sql = "SELECT  short_url.*, user.username as creator
+				FROM    short_url
+				JOIN    user ON user.userID = short_url.userID
+				WHERE   applicationID = " . $this->application['applicationID'] . "
+				ORDER BY " . $sortField . " " . $sortOrder;
 		$statement = $this->db->query($sql);
 		return $statement->fetchAll();
 	}
 
 	/**
-	 * Creates an url mapping.
+	 * Creates a new short url.
 	 *
 	 * @param string $longUrl
 	 * @param string $shortUrl
@@ -106,17 +141,16 @@ class UrlShortener {
 			} while ($this->expandUrl($shortUrl));
 		}
 
-		$user = (isset($_SERVER['PHP_AUTH_USER']) ? $_SERVER['PHP_AUTH_USER'] : '');
-		$sql = "INSERT INTO short_url (applicationID, longUrl, shortUrl, creator, createdTime, expire, details, protected) VALUES
-			(" . $this->application['applicationID'] . ", " . $this->db->quote($longUrl) . ", " . $this->db->quote($shortUrl) . ", " . $this->db->quote($user) . ", " .
-			time() . ", " . ($expire > 0 ? $expire : 'Null') . ", " . $this->db->quote($details) . ", " . ($protected ? 1 : 0) . ")";
+		$sql = "INSERT INTO short_url (applicationID, longUrl, shortUrl, userID, createdTime, expire, details, protected) VALUES
+			(" . $this->application['applicationID'] . ", " . $this->db->quote($longUrl) . ", " . $this->db->quote($shortUrl) . ", " . $this->db->quote($this->user['userID']) .
+			", " . time() . ", " . ($expire > 0 ? $expire : 'Null') . ", " . $this->db->quote($details) . ", " . ($protected ? 1 : 0) . ")";
 		$this->db->query($sql);
 
 		return self::expandShortUrl($shortUrl);
 	}
 
 	/**
-	 * Updates an url mapping.
+	 * Updates a short url.
 	 *
 	 * @param int    $shortUrlID
 	 * @param string $longUrl
@@ -133,7 +167,7 @@ class UrlShortener {
 	}
 
 	/**
-	 * Deletes an url mapping.
+	 * Deletes a short url.
 	 *
 	 * @param integer $shortUrlID
 	 * @return boolean
@@ -175,5 +209,16 @@ class UrlShortener {
 	 */
 	public static function expandShortUrl($shortUrl) {
 		return SERVICE_BASEURL . '?' . $shortUrl;
+	}
+
+	/**
+	 * Returns the password hash.
+	 *
+	 * @param string $password
+	 * @param string $salt
+	 * @return string
+	 */
+	public static function getHash($password, $salt) {
+		return crypt(crypt($password, $salt), $salt);
 	}
 }
