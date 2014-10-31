@@ -39,7 +39,7 @@ class UrlEditForm extends UrlCreateForm {
 		$this->shortUrl = $this->urlMapping['shortUrl'];
 		$this->expire = $this->urlMapping['expire'];
 		$this->details = $this->urlMapping['details'];
-		$this->protected = $this->urlMapping['protect'];
+		$this->protected = $this->urlMapping['protected'];
 
 		parent::run();
 	}

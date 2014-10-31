@@ -66,7 +66,7 @@ class UrlCreateForm extends AbstractPage {
 		if (isset($_POST['shortUrl'])) $this->shortUrl = $_POST['shortUrl'];
 		if (isset($_POST['expire'])) $this->expire = intval($_POST['expire']);
 		if (isset($_POST['details'])) $this->details = $_POST['details'];
-		if (isset($_POST['protected'])) $this->protected = true;
+		$this->protected = isset($_POST['protected']);
 	}
 
 	/**
