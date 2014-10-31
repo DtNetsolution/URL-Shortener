@@ -75,9 +75,6 @@
 			</div>
 		</div>
 	</div>
-	<script src="<?php echo SERVICE_BASEURL; ?>assets/js/jquery-2.1.1.min.js"></script>
-	<script src="<?php echo SERVICE_BASEURL; ?>assets/js/bootstrap.min.js"></script>
-	<script src="<?php echo SERVICE_BASEURL; ?>assets/js/url-shortener.js"></script>
 <?php } else { ?>
 	<p class="text-danger">Es wurden keine URLs verk&uuml;rzt.</p>
 <?php }

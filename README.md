@@ -18,6 +18,26 @@ Um mehrere Instanzen zu betreiben, müssen alle URLs auf den selben Ordner mit d
 
 **Hinweis:** Es kann nur eine Instanz pro Domain Host betrieben werden.
 
+Individuelle Anpassungen - Zusätzliches JavaScript und CSS
+----------------------------------------------------------
+
+Zusätzliches JavaScript und CSS kann in die Dateien `assets/custom/additional.js` und `assets/custom/additional.css` geschrieben werden. Das zusätzliche JavaScript und CSS wird nach dem Standard-JavaScript bzw. Standard-CSS geladen und kann somit alles überschreiben.
+
+Diese Dateien werden bei Updates **nicht überschrieben**, müssen aber für volle Kompabilität ggf. angepasst werden.
+
+Individuelle Anpassungen
+------------------------
+
+Sollten weitgehende Änderungen erwüscht sein, so können beliebige Tempaltes verändert werden. Dazu wird eine Kopie der entsprechenden Datei im Ordner `templates/custom` erstellt. Die Orginaltemplates liegen im Ordner `templates`. Die Dateien im Ordner `templates/custom` werden bei Updates **nicht überschrieben**, **müssen aber ggf. angepasst werden**.
+
+**Tipp:** Für grundlegende Änderungen kann das CSS komplett ausgetauscht werden.
+
+1. Eine Kopie des Templates `templates/header.php` erstellen.
+2. Den Pfad der geladenen CSS-Dateien ändern. Dazu wird das Template `templates/custom/header.php` angepasst. Beispiel: Ändern von `<link href="<?php echo SERVICE_BASEURL; ?>assets/css/bootstrap.min.css" rel="stylesheet">` in `<link href="<?php echo SERVICE_BASEURL; ?>assets/custom/bootstrap.min.css" rel="stylesheet">`.
+3. Eine neue Variante von [Bootstrap 3.3.0](http://getbootstrap.com/) mit einer der folgenden Möglichkeiten erstellen:
+	- Verwenden Sie den [Customizer](http://getbootstrap.com/customize/).
+	- Downloaden und kompilen Sie Bootstrap selbst. [Dokumentation siehe Bootstrap Seite](http://getbootstrap.com/getting-started/#grunt).
+
 Lizenz
 ------
 

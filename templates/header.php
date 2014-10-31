@@ -1,8 +1,12 @@
 <html lang="de">
 	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>URL Shortener</title>
 
 		<link href="<?php echo SERVICE_BASEURL; ?>assets/css/bootstrap.min.css" rel="stylesheet">
+		<link href="<?php echo SERVICE_BASEURL; ?>assets/custom/additional.css" rel="stylesheet">
 		<style type="text/css">
 			.glyphicon {
 				color: #000;
@@ -21,7 +25,7 @@
 		<header class="navbar navbar-inverse">
 			<div class="container">
 				<div class="navbar-header">
-					<a href="create.php" class="navbar-brand">URL Shortener</a>
+					<a href="<?php echo SERVICE_BASEURL; ?>admin/create.php" class="navbar-brand">URL Shortener</a>
 				</div>
 				<nav>
 					<ul class="nav navbar-nav">

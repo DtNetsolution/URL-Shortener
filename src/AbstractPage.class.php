@@ -32,9 +32,12 @@ abstract class AbstractPage {
 	 * @param string $template
 	 * @param mixed  $parameter
 	 */
-	protected function show($template, /** @noinspection PhpUnusedParameterInspection */
-	                        $parameter = null) {
-		/** @noinspection PhpIncludeInspection */
-		include BASE_DIR . 'templates/' . $template . '.php';
+	protected function show($template, $parameter = null) {
+		$file = BASE_DIR . 'templates/custom/' . $template . '.php';
+		if (!file_exists($file)) {
+			$file = BASE_DIR . 'templates/' . $template . '.php';
+		}
+
+		include $file;
 	}
 }
