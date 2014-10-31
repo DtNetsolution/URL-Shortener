@@ -1,7 +1,16 @@
 URL Shortener
 =============
 
-Ein URL Shorter mit Unterstützung für mehrere Instanzen.
+Ein URL Shortener mit vielen Features:
+
+- Mehrere Instanzen
+- Zufällige kurze URLs
+- Automatische Linkbereinigung mit regulären Ausdrücken
+- Automatische Linklöschung
+- Links schützen
+- Benutzerverwaltung
+	- Integriertes Rollenmodell (Administrator und Benutzer)
+- Individuelle Anpassungen am Design
 
 Einrichtung
 -----------

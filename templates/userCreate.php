@@ -20,7 +20,8 @@
 		</div>
 	</div>
 	<div class="form-group">
-		<div class="col-lg-offset-2 col-lg-10">
+		<label class="col-lg-2 control-label">Rolle</label>
+		<div class="col-lg-10">
 			<?php foreach (UrlShortener::$roles as $role => $name) { ?>
 				<div class="radio">
 					<label>
