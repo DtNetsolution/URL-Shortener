@@ -72,6 +72,6 @@ class UrlEditForm extends UrlCreateForm {
 			", protected = " . ($this->protected ? 1 : 0) . " WHERE shortUrlID = " . $this->urlMapping['shortUrlID'];
 		$this->urlShortener->getDB()->query($sql);
 
-		$this->show('urlUpdated', UrlShortener::expandShortUrl($this->shortUrl));
+		$this->show('urlSaved', UrlShortener::expandShortUrl($this->shortUrl));
 	}
 }

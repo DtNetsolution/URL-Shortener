@@ -122,7 +122,7 @@ class UrlCreateForm extends AbstractPage {
 			$this->urlShortener->getDB()->quote($this->details) . ", " . ($this->protected ? 1 : 0) . ")";
 		$this->urlShortener->getDB()->query($sql);
 
-		$this->show('urlSaved', UrlShortener::expandShortUrl($this->shortUrl));
+		$this->show('urlCreated', UrlShortener::expandShortUrl($this->shortUrl));
 		$this->longUrl = $this->shortUrl = $this->details = '';
 		$this->expire = 0;
 		$this->protected = false;

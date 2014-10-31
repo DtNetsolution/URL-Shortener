@@ -30,7 +30,7 @@
 		<header class="navbar navbar-inverse">
 			<div class="container">
 				<div class="navbar-header">
-					<a href="<?php echo SERVICE_BASEURL; ?>admin/create.php" class="navbar-brand">URL Shortener</a>
+					<a href="<?php echo SERVICE_BASEURL; ?>admin/urlCreate.php" class="navbar-brand">URL Shortener</a>
 				</div>
 				<nav>
 					<ul class="nav navbar-nav">
