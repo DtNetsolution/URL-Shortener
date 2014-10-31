@@ -139,8 +139,9 @@ class UrlShortener {
 	 * @return boolean
 	 */
 	public function deleteUrl($shortUrlID) {
-		$sql = "DELETE FROM short_url WHERE applicationID = " . $this->application['applicationID'] . " AND shortUrlID = " . intval($shortUrlID);
-		return (bool) $this->db->exec($sql);
+		$sql = "DELETE FROM short_url WHERE applicationID = " . $this->application['applicationID'] . " AND shortUrlID = " . intval($shortUrlID) . " AND protected = 0";
+		$statement = $this->db->query($sql);
+		return $statement->rowCount() > 0;
 	}
 
 	/**

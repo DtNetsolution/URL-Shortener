@@ -14,7 +14,7 @@ class UrlDeleteAction extends AbstractPage {
 	public function run() {
 		$this->execute();
 
-		header('Location: ' . SERVICE_BASEURL . 'admin/list.php');
+		header('Location: ' . SERVICE_BASEURL . 'admin/');
 		exit;
 	}
 

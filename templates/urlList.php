@@ -3,31 +3,31 @@
 		<thead>
 			<tr>
 				<th class="small-column" colspan="2">
-					<a href="<?php echo SERVICE_BASEURL; ?>admin/list.php?sortField=shortUrlID">ID</a>
+					<a href="<?php echo SERVICE_BASEURL; ?>admin/?sortField=shortUrlID">ID</a>
 					<?php if ($this->sortField == 'shortUrlID') { ?>
 						<span class="glyphicon glyphicon-sort-by-alphabet"></span>
 					<?php } ?>
 				</th>
 				<th>
-					<a href="<?php echo SERVICE_BASEURL; ?>admin/list.php?sortField=longUrl">Lange URL</a>
+					<a href="<?php echo SERVICE_BASEURL; ?>admin/?sortField=longUrl">Lange URL</a>
 					<?php if ($this->sortField == 'longUrl') { ?>
 						<span class="glyphicon glyphicon-sort-by-alphabet"></span>
 					<?php } ?>
 				</th>
-				<th class="small-column">
-					<a href="<?php echo SERVICE_BASEURL; ?>admin/list.php?sortField=shortUrl">Kurze URL</a>
+				<th>
+					<a href="<?php echo SERVICE_BASEURL; ?>admin/?sortField=shortUrl">Kurze URL</a>
 					<?php if ($this->sortField == 'shortUrl') { ?>
 						<span class="glyphicon glyphicon-sort-by-alphabet"></span>
 					<?php } ?>
 				</th>
 				<th class="small-column">
-					<a href="<?php echo SERVICE_BASEURL; ?>admin/list.php?sortField=creator">Ersteller</a>
+					<a href="<?php echo SERVICE_BASEURL; ?>admin/?sortField=creator">Ersteller</a>
 					<?php if ($this->sortField == 'creator') { ?>
 						<span class="glyphicon glyphicon-sort-by-alphabet"></span>
 					<?php } ?>
 				</th>
 				<th class="small-column">
-					<a href="<?php echo SERVICE_BASEURL; ?>admin/list.php?sortField=createdTime">Zeitpunkt</a>
+					<a href="<?php echo SERVICE_BASEURL; ?>admin/?sortField=createdTime">Zeitpunkt</a>
 					<?php if ($this->sortField == 'createdTime') { ?>
 						<span class="glyphicon glyphicon-sort-by-attributes-alt"></span>
 					<?php } ?>
@@ -52,7 +52,7 @@
 					</td>
 
 					<td><a href="<?php echo $url['longUrl']; ?>" target="blank"><?php echo $url['longUrl']; ?></a></td>
-					<td class="small-column">
+					<td>
 						<a href="<?php echo UrlShortener::expandShortUrl($url['shortUrl']); ?>" target="blank">
 							<?php echo $url['shortUrl']; ?>
 						</a>
