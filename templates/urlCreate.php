@@ -59,14 +59,22 @@
 				</div>
 				<div class="radio">
 					<label>
-						<input type="radio" name="expire" value="7"<?php if($this->expire == 7) echo '  checked="checked"'; ?>/> Nach sieben Tagen automatisch l&ouml;schen
+						<input type="radio" name="expire" value="<?php echo time() + 7*24*60*60; if($this->expire == 7) echo '  checked="checked"'; ?>"/> In sieben Tagen automatisch l&ouml;schen
 					</label>
 				</div>
 				<div class="radio">
 					<label>
-						<input type="radio" name="expire" value="31"<?php if($this->expire == 31) echo '  checked="checked"'; ?>/> Nach 31 Tagen automatisch l&ouml;schen
+						<input type="radio" name="expire" value="<?php echo time() + 31*24*60*60; if($this->expire == 31) echo '  checked="checked"'; ?>"/> In 31 Tagen automatisch l&ouml;schen
 					</label>
 				</div>
+
+				<?php if($this->action == 'edit' && $this->expire) { ?>
+					<div class="radio">
+						<label>
+							<input type="radio" name="expire" value="<?php echo $this->expire; ?>" checked="checked"/> Am <?php echo date('d.m.Y', $this->expire); ?> automatisch l&ouml;schen
+						</label>
+					</div>
+				<?php } ?>
 			</div>
 		</div>
 		<div class="form-group">

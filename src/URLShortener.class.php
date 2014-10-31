@@ -63,7 +63,7 @@ class UrlShortener {
 	}
 
 	/**
-	 * Expands a shortened url into the full one.
+	 * Expands a shortened url into its full version.
 	 *
 	 * @param string $shortUrl
 	 * @return string
@@ -73,11 +73,7 @@ class UrlShortener {
 		$statement = $this->db->query($sql);
 		$row = $statement->fetch();
 
-		if ($row) {
-			return $row['longUrl'];
-		} else {
-			return null;
-		}
+		return ($row ? $row['longUrl'] : null);
 	}
 
 	/**
@@ -113,7 +109,7 @@ class UrlShortener {
 		$user = (isset($_SERVER['PHP_AUTH_USER']) ? $_SERVER['PHP_AUTH_USER'] : '');
 		$sql = "INSERT INTO short_url (applicationID, longUrl, shortUrl, creator, createdTime, expire, details, protected) VALUES
 			(" . $this->application['applicationID'] . ", " . $this->db->quote($longUrl) . ", " . $this->db->quote($shortUrl) . ", " . $this->db->quote($user) . ", " .
-			time() . ", " . ($expire > 0 ? time() + $expire * 24 * 60 * 60 : 'Null') . ", " . $this->db->quote($details) . ", " . ($protected ? 1 : 0) . ")";
+			time() . ", " . ($expire > 0 ? $expire : 'Null') . ", " . $this->db->quote($details) . ", " . ($protected ? 1 : 0) . ")";
 		$this->db->query($sql);
 
 		return self::expandShortUrl($shortUrl);
@@ -131,8 +127,8 @@ class UrlShortener {
 	 * @return string
 	 */
 	public function updateUrl($shortUrlID, $longUrl, $shortUrl, $expire, $details, $protected) {
-		$sql = "UPDATE short_url SET longUrl = " . $this->db->quote($longUrl) . ", shortUrl = " . $this->db->quote($shortUrl) . ", details = " . $this->db->quote($details) .
-			", protected = " . ($protected ? 1 : 0) . " WHERE shortUrlID = " . $shortUrlID;
+		$sql = "UPDATE short_url SET longUrl = " . $this->db->quote($longUrl) . ", shortUrl = " . $this->db->quote($shortUrl) . ", expire = " . $expire .
+			", details = " . $this->db->quote($details) . ", protected = " . ($protected ? 1 : 0) . " WHERE shortUrlID = " . $shortUrlID;
 		$this->db->query($sql);
 	}
 
@@ -144,7 +140,7 @@ class UrlShortener {
 	 */
 	public function deleteUrl($shortUrlID) {
 		$sql = "DELETE FROM short_url WHERE applicationID = " . $this->application['applicationID'] . " AND shortUrlID = " . intval($shortUrlID);
-		return (bool)$this->db->exec($sql);
+		return (bool) $this->db->exec($sql);
 	}
 
 	/**
