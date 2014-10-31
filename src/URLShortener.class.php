@@ -29,7 +29,7 @@ class UrlShortener {
 	 *
 	 * @var string[]
 	 */
-	protected $user = array();
+	protected $user = array('userID' => 0, 'role' => 'user');
 
 	/**
 	 * current application
@@ -63,7 +63,7 @@ class UrlShortener {
 		}
 
 		// ask for credentials if no user
-		if (!$this->user) {
+		if (!$this->user['userID']) {
 			$this->cleanupUrls();
 			header('WWW-Authenticate: Basic realm="URL Shortener Login"');
 			header('HTTP/1.0 401 Unauthorized');

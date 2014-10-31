@@ -57,7 +57,7 @@
 						<?php } ?>
 
 						<li>
-							<a href="<?php echo str_replace('://', '://go:go@', SERVICE_BASEURL); ?>admin/urlCreate.php">Abmelden</a>
+							<a href="<?php echo str_replace('://', '://go:go@', SERVICE_BASEURL); ?>admin/">Abmelden</a>
 						</li>
 					</ul>
 				</nav>

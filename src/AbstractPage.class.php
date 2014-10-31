@@ -14,7 +14,7 @@ abstract class AbstractPage {
 	protected $urlShortener = null;
 
 	/**
-	 * Initializes the form.
+	 * Initializes the page.
 	 */
 	public function __construct() {
 		$this->urlShortener = new UrlShortener();

@@ -24,6 +24,15 @@ class UrlListPage extends AbstractPage {
 	protected $validSortFields = array('shortUrlID', 'shortUrl', 'longUrl', 'creator', 'createdTime');
 
 	/**
+	 * Initializes the page.
+	 */
+	public function __construct() {
+		$this->urlShortener = new UrlShortener();
+		if (!LIST_URLS_NO_USER) $this->urlShortener->loadUser();
+		$this->urlShortener->loadApplication();
+	}
+
+	/**
 	 * Runs the page.
 	 */
 	public function run() {

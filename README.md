@@ -28,6 +28,8 @@ Um mehrere Instanzen zu betreiben, müssen alle URLs auf den selben Ordner mit d
 
 **Hinweis:** Es kann nur eine Instanz pro Domain Host betrieben werden.
 
+Um Benutzern das Anzeigen aller Links ohne Login zu ermöglichen, muss der Wert der Konstante `LIST_URLS_NO_USER` auf `true` gesetzt werden.
+
 Automatische Linkbereinigung
 ----------------------------
 

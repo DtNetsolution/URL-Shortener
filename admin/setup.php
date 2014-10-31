@@ -28,7 +28,8 @@ if (isset($_POST['databaseHost']) && isset($_POST['databaseDB']) && isset($_POST
 $databaseHost = \'' . $_POST['databaseHost'] . '\';
 $databaseDB = \'' . $_POST['databaseDB'] . '\';
 $databaseUser = \'' . $_POST['databaseUser'] . '\';
-$databasePassword = \'' . $_POST['databasePassword'] . '\';');
+$databasePassword = \'' . $_POST['databasePassword'] . '\';
+define(\'LIST_URLS_NO_USER\', false);');
 
 		// redirect to application setup
 		header('Location: urlCreate.php');
