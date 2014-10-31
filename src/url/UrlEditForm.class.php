@@ -39,7 +39,7 @@ class UrlEditForm extends UrlCreateForm {
 		$this->shortUrl = $this->urlMapping['shortUrl'];
 		$this->expire = $this->urlMapping['expire'];
 		$this->details = $this->urlMapping['details'];
-		$this->protect = $this->urlMapping['protect'];
+		$this->protected = $this->urlMapping['protect'];
 
 		parent::run();
 	}
@@ -61,7 +61,7 @@ class UrlEditForm extends UrlCreateForm {
 	 * Saves the form.
 	 */
 	protected function save() {
-		$this->urlShortener->updateUrl($this->urlMapping['shortUrlID'], $this->longUrl, $this->shortUrl, $this->expire, $this->details, $this->protect);
+		$this->urlShortener->updateUrl($this->urlMapping['shortUrlID'], $this->longUrl, $this->shortUrl, $this->expire, $this->details, $this->protected);
 		$this->show('urlUpdated', UrlShortener::expandShortUrl($this->shortUrl));
 	}
 }

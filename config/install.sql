@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS short_url (
   createdTime   INT(15) UNSIGNED NOT NULL,
   expire        INT              NULL DEFAULT NULL,
   details       MEDIUMTEXT       NOT NULL,
-  protect       TINYINT          NOT NULL DEFAULT 0,
+  protected       TINYINT          NOT NULL DEFAULT 0,
 
   PRIMARY KEY (shortUrlID),
   UNIQUE INDEX (applicationID, shortUrl)

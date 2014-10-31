@@ -80,7 +80,7 @@
 			<div class="col-lg-offset-2 col-lg-10">
 				<div class="checkbox">
 					<label>
-						<input type="checkbox" name="protect"<?php if($this->protect) echo ' checked="checked"'; ?>/> Diesen Eintrag sch&uuml;tzen
+						<input type="checkbox" name="protected"<?php if($this->protected) echo ' checked="checked"'; ?>/> Diesen Eintrag sch&uuml;tzen
 					</label>
 				</div>
 			</div>

@@ -31,7 +31,7 @@ class UrlCreateForm extends AbstractPage {
 	/**
 	 * @var bool
 	 */
-	protected $protect = false;
+	protected $protected = false;
 
 	/**
 	 * @var string
@@ -66,7 +66,7 @@ class UrlCreateForm extends AbstractPage {
 		if (isset($_POST['shortUrl'])) $this->shortUrl = $_POST['shortUrl'];
 		if (isset($_POST['expire'])) $this->expire = intval($_POST['expire']);
 		if (isset($_POST['details'])) $this->details = $_POST['details'];
-		if (isset($_POST['protect'])) $this->protect = true;
+		if (isset($_POST['protected'])) $this->protected = true;
 	}
 
 	/**
@@ -110,11 +110,11 @@ class UrlCreateForm extends AbstractPage {
 	 * Saves the form.
 	 */
 	protected function save() {
-		$shortUrl = $this->urlShortener->createUrl($this->longUrl, $this->shortUrl, $this->expire, $this->details, $this->protect);
+		$shortUrl = $this->urlShortener->createUrl($this->longUrl, $this->shortUrl, $this->expire, $this->details, $this->protected);
 
 		$this->show('urlSaved', $shortUrl);
 		$this->longUrl = $this->shortUrl = $this->details = '';
 		$this->expire = 0;
-		$this->protect = false;
+		$this->protected = false;
 	}
 }

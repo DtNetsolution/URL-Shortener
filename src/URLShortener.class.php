@@ -100,10 +100,10 @@ class UrlShortener {
 	 * @param string $shortUrl
 	 * @param int    $expire
 	 * @param string $details
-	 * @param bool   $protect
+	 * @param bool   $protected
 	 * @return string
 	 */
-	public function createUrl($longUrl, $shortUrl = null, $expire = 0, $details = '', $protect = false) {
+	public function createUrl($longUrl, $shortUrl = null, $expire = 0, $details = '', $protected = false) {
 		if (!$shortUrl) {
 			do {
 				$shortUrl = mt_rand(11111, 99999);
@@ -111,9 +111,9 @@ class UrlShortener {
 		}
 
 		$user = (isset($_SERVER['PHP_AUTH_USER']) ? $_SERVER['PHP_AUTH_USER'] : '');
-		$sql = "INSERT INTO short_url (applicationID, longUrl, shortUrl, creator, createdTime, expire, details, protect) VALUES
+		$sql = "INSERT INTO short_url (applicationID, longUrl, shortUrl, creator, createdTime, expire, details, protected) VALUES
 			(" . $this->application['applicationID'] . ", " . $this->db->quote($longUrl) . ", " . $this->db->quote($shortUrl) . ", " . $this->db->quote($user) . ", " .
-			time() . ", " . ($expire > 0 ? time() + $expire * 24 * 60 * 60 : 'Null') . ", " . $this->db->quote($details) . ", " . ($protect ? 1 : 0) . ")";
+			time() . ", " . ($expire > 0 ? time() + $expire * 24 * 60 * 60 : 'Null') . ", " . $this->db->quote($details) . ", " . ($protected ? 1 : 0) . ")";
 		$this->db->query($sql);
 
 		return self::expandShortUrl($shortUrl);
@@ -127,12 +127,12 @@ class UrlShortener {
 	 * @param string $shortUrl
 	 * @param int    $expire
 	 * @param string $details
-	 * @param bool   $protect
+	 * @param bool   $protected
 	 * @return string
 	 */
-	public function updateUrl($shortUrlID, $longUrl, $shortUrl, $expire, $details, $protect) {
+	public function updateUrl($shortUrlID, $longUrl, $shortUrl, $expire, $details, $protected) {
 		$sql = "UPDATE short_url SET longUrl = " . $this->db->quote($longUrl) . ", shortUrl = " . $this->db->quote($shortUrl) . ", details = " . $this->db->quote($details) .
-			", protect = " . ($protect ? 1 : 0) . " WHERE shortUrlID = " . $shortUrlID;
+			", protected = " . ($protected ? 1 : 0) . " WHERE shortUrlID = " . $shortUrlID;
 		$this->db->query($sql);
 	}
 
