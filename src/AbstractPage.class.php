@@ -41,4 +41,14 @@ abstract class AbstractPage {
 
 		include $file;
 	}
+
+	/**
+	 * Checks if the user has admin permissions
+	 */
+	protected function checkAdminPermissions() {
+		if ($this->urlShortener->getRole() != 'admin') {
+			header('Location: ' . SERVICE_BASEURL . 'admin/urlCreate.php');
+			exit;
+		}
+	}
 }

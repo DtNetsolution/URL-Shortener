@@ -17,6 +17,7 @@ class UserListPage extends AbstractPage {
 	 * Runs the page.
 	 */
 	public function run() {
+		$this->checkAdminPermissions();
 		$this->show('header', 'userList');
 
 		$this->readData();
