@@ -23,6 +23,12 @@
 				white-space: nowrap;
 				overflow: hidden;
 			}
+
+			#mainContainer {
+				position: relative;
+				min-height: 100%;
+				padding-bottom: 50px;
+			}
 		</style>
 	</head>
 
@@ -57,4 +63,4 @@
 				</nav>
 			</div>
 		</header>
-		<div class="container">
+		<div id="mainContainer" class="container">
