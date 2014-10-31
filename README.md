@@ -18,6 +18,19 @@ Um mehrere Instanzen zu betreiben, müssen alle URLs auf den selben Ordner mit d
 
 **Hinweis:** Es kann nur eine Instanz pro Domain Host betrieben werden.
 
+Automatische Linkbereinigung
+----------------------------
+
+Nach der Einrichtung können in der Konfiguration eingetragen werden, mit welchen automatisch die lange URL ersetzt wird. Die regulären Ausdrücke müssen kompatibel zu PHP sein ([PCRE](http://php.net/manual/de/book.pcre.php)). Gefundene Teilstrings werden entfernt.
+
+Beispiele: (an die Konfiguration `config/config.php` anhängen)
+
+    // Alles nach "#" entfernen => Hashs entfernen
+    $this->addStripRegex('~#.+$~');
+    
+    // Alles nach "%3FTocPath%3D" entfernen
+    $this->addStripRegex('~%3FTocPath%3D.+$~');
+
 Individuelle Anpassungen - Zusätzliches JavaScript und CSS
 ----------------------------------------------------------
 
