@@ -40,7 +40,7 @@
 
 		<div class="form-group">
 			<div class="col-lg-offset-2 col-lg-10">
-				<input type="submit" value="<?php echo($this->action == 'create' ? 'URL Verk&uuml;rzen' : 'Aktualisieren') ?>" class="btn btn-primary"/>
+				<input type="submit" value="<?php echo($this->action == 'create' ? 'URL Verk&uuml;rzen' : 'Änderungen Speichern') ?>" class="btn btn-primary"/>
 			</div>
 		</div>
 	</fieldset>
@@ -96,7 +96,7 @@
 
 		<div class="form-group">
 			<div class="col-lg-offset-2 col-lg-10">
-				<input type="submit" value="<?php echo($this->action == 'create' ? 'URL Verk&uuml;rzen' : 'Aktualisieren') ?>" class="btn btn-primary"/>
+				<input type="submit" value="<?php echo($this->action == 'create' ? 'URL Verk&uuml;rzen' : 'Änderungen Speichern') ?>" class="btn btn-primary"/>
 			</div>
 		</div>
 	</fieldset>

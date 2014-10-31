@@ -45,7 +45,7 @@ if (count($this->urls)) { ?>
 						   class="glyphicon glyphicon-pencil" title="Bearbeiten"></a>
 
 						<?php if($url['protected']) { ?>
-							<span class="glyphicon glyphicon-lock" title="Gesch&ouml;tzt"></span>
+							<span class="glyphicon glyphicon-lock" title="Gesch&uuml;tzt"></span>
 						<?php } else { ?>
 							<a href="<?php echo SERVICE_BASEURL; ?>admin/urlDelete.php?id=<?php echo $url['shortUrlID']; ?>"
 							   data-detail="<?php echo UrlShortener::expandShortUrl($url['shortUrl']); ?>"
