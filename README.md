@@ -46,6 +46,8 @@ Individuelle Anpassungen - Zusätzliches JavaScript und CSS
 
 Zusätzliches JavaScript und CSS kann in die Dateien `assets/custom/additional.js` und `assets/custom/additional.css` geschrieben werden. Das zusätzliche JavaScript und CSS wird nach dem Standard-JavaScript bzw. Standard-CSS geladen und kann somit alles überschreiben.
 
+Zusätzliches CSS für die Not Found-Seite wird aus der Datei `assets/custom/notFound.css` geladen.
+
 Diese Dateien werden bei Updates **nicht überschrieben**, müssen aber für volle Kompabilität ggf. angepasst werden.
 
 Individuelle Anpassungen
