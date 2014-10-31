@@ -25,7 +25,7 @@ class UrlDeleteAction extends AbstractPage {
 		if (!empty($_GET['id'])) {
 			$sql = "DELETE FROM short_url
 					WHERE   applicationID = " . $this->urlShortener->getApplicationID() . " AND
-							shortUrlID = " . intval(intval($_GET['id'])) . " AND
+							shortUrlID = " . intval($_GET['id']) . " AND
 							protected = 0";
 			$this->urlShortener->getDB()->query($sql);
 

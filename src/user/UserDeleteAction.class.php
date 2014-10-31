@@ -24,7 +24,7 @@ class UserDeleteAction extends AbstractPage {
 	public function execute() {
 		if (!empty($_GET['id'])) {
 			$sql = "DELETE FROM user
-					WHERE   userID = " . intval(intval($_GET['id']));
+					WHERE   userID = " . intval($_GET['id']);
 			$this->urlShortener->getDB()->query($sql);
 
 			header('Location: ' . SERVICE_BASEURL . 'admin/userList.php?deleted');
