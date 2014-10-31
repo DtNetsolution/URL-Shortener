@@ -1,14 +1,15 @@
+<?php /** @var $this UrlEditForm */ ?>
 <form action="<?php echo SERVICE_BASEURL.'admin/'.($this->action == 'create' ? 'create.php' : 'edit.php?id='.$this->urlMapping['shortUrlID']); ?>" method="post" class="form-horizontal">
 	<fieldset>
 		<legend>Allgemeine Informationen</legend>
 
-		<div class="form-group<?php if ($this->error['field'] == 'longURL') echo ' has-error' ?>">
-			<label for="longURL" class="col-lg-2 control-label">Lange URL</label>
+		<div class="form-group<?php if ($this->error['field'] == 'longUrl') echo ' has-error' ?>">
+			<label for="longUrl" class="col-lg-2 control-label">Lange URL</label>
 
 			<div class="col-lg-10">
-				<input type="text" id="longURL" name="longURL" value="<?php echo $this->longURL; ?>" required="required"
+				<input type="text" id="longUrl" name="longUrl" value="<?php echo $this->longUrl; ?>" required="required"
 				       autofocus="autofocus" class="form-control"/>
-				<?php if ($this->error['field'] == 'longURL') { ?>
+				<?php if ($this->error['field'] == 'longUrl') { ?>
 					<span class="help-block">Bitte geben Sie eine g&uuml;lltige URL wie zum Beispiel
 					<a href="http://google.de/">http://google.de/</a> oder <a href="http://www.softwaredemo.com/">softwaredemo.com</a> ein.
 				</span>
@@ -17,18 +18,18 @@
 				<?php } ?>
 			</div>
 		</div>
-		<div class="form-group<?php if ($this->error['field'] == 'shortURL') echo ' has-error' ?>">
-			<label for="shortURL" class="col-lg-2 control-label">Kurze URL</label>
+		<div class="form-group<?php if ($this->error['field'] == 'shortUrl') echo ' has-error' ?>">
+			<label for="shortUrl" class="col-lg-2 control-label">Kurze URL</label>
 
 			<div class="col-lg-10">
 				<div class="row">
 					<div class="col-lg-4 control-label" style="width: auto;"><?php echo SERVICE_BASEURL; ?></div>
 					<div class="col-lg-6">
-						<input type="text" id="shortURL" name="shortURL" value="<?php echo $this->shortURL; ?>"
+						<input type="text" id="shortUrl" name="shortUrl" value="<?php echo $this->shortUrl; ?>"
 						       class="form-control"/>
 					</div>
 				</div>
-				<?php if ($this->error['field'] == 'shortURL') { ?>
+				<?php if ($this->error['field'] == 'shortUrl') { ?>
 					<span class="help-block">Diese kurze URL wird bereits f&uuml;r <a
 							href="<?php echo $this->error['url']; ?>"><?php echo $this->error['url']; ?></a> verwendet.</span>
 				<?php } else { ?>

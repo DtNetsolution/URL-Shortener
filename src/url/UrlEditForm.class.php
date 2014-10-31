@@ -3,7 +3,7 @@ require_once BASE_DIR . 'src/AbstractPage.class.php';
 require_once BASE_DIR . 'src/url/UrlCreateForm.class.php';
 
 /**
- * Edits URL mappings.
+ * Edits short urls.
  *
  * @author    Magnus Kühn
  * @copyright 2013-2014 Magnus Kühn
@@ -35,8 +35,8 @@ class UrlEditForm extends UrlCreateForm {
 		}
 
 		// set current values
-		$this->longURL = $this->urlMapping['longUrl'];
-		$this->shortURL = $this->urlMapping['shortUrl'];
+		$this->longUrl = $this->urlMapping['longUrl'];
+		$this->shortUrl = $this->urlMapping['shortUrl'];
 		$this->expire = $this->urlMapping['expire'];
 		$this->details = $this->urlMapping['details'];
 		$this->protect = $this->urlMapping['protect'];
@@ -50,7 +50,7 @@ class UrlEditForm extends UrlCreateForm {
 	 * @return bool
 	 */
 	protected function validateShortUrl() {
-		if ($this->shortURL != $this->urlMapping['shortUrl']) {
+		if ($this->shortUrl != $this->urlMapping['shortUrl']) {
 			return parent::validateShortUrl();
 		}
 
@@ -61,7 +61,7 @@ class UrlEditForm extends UrlCreateForm {
 	 * Saves the form.
 	 */
 	protected function save() {
-		$this->urlShortener->updateUrl($this->urlMapping['shortUrlID'], $this->longURL, $this->shortURL, $this->expire, $this->details, $this->protect);
-		$this->show('urlUpdated', URLShortener::expandShortURL($this->shortURL));
+		$this->urlShortener->updateUrl($this->urlMapping['shortUrlID'], $this->longUrl, $this->shortUrl, $this->expire, $this->details, $this->protect);
+		$this->show('urlUpdated', UrlShortener::expandShortUrl($this->shortUrl));
 	}
 }

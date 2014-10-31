@@ -2,7 +2,7 @@
 require_once BASE_DIR . 'src/AbstractPage.class.php';
 
 /**
- * Creates URL mappings.
+ * Creates a short url.
  *
  * @author    Magnus Kühn
  * @copyright 2013-2014 Magnus Kühn
@@ -11,12 +11,12 @@ class UrlCreateForm extends AbstractPage {
 	/**
 	 * @var string
 	 */
-	protected $longURL = '';
+	protected $longUrl = '';
 
 	/**
 	 * @var string
 	 */
-	protected $shortURL = '';
+	protected $shortUrl = '';
 
 	/**
 	 * @var int
@@ -62,8 +62,8 @@ class UrlCreateForm extends AbstractPage {
 	 * Reads parameters for the form.
 	 */
 	protected function readParameters() {
-		if (isset($_POST['longURL'])) $this->longURL = $_POST['longURL'];
-		if (isset($_POST['shortURL'])) $this->shortURL = $_POST['shortURL'];
+		if (isset($_POST['longUrl'])) $this->longUrl = $_POST['longUrl'];
+		if (isset($_POST['shortUrl'])) $this->shortUrl = $_POST['shortUrl'];
 		if (isset($_POST['expire'])) $this->expire = intval($_POST['expire']);
 		if (isset($_POST['details'])) $this->details = $_POST['details'];
 		if (isset($_POST['protect'])) $this->protect = true;
@@ -75,19 +75,19 @@ class UrlCreateForm extends AbstractPage {
 	 * @return bool
 	 */
 	protected function validateParameters() {
-		// fix long URL
-		$this->longURL = $this->urlShortener->stripURL(trim($this->longURL));
-		if (!preg_match('~^http[s]?://~', $this->longURL)) {
-			$this->longURL = 'http://' . $this->longURL;
+		// fix long url
+		$this->longUrl = $this->urlShortener->stripUrl(trim($this->longUrl));
+		if (!preg_match('~^http[s]?://~', $this->longUrl)) {
+			$this->longUrl = 'http://' . $this->longUrl;
 		}
 
-		// validate long URL
-		if (!preg_match('~^http[s]?://([a-z]+\.){1,2}[a-z]+~i', $this->longURL)) {
-			$this->error = array('field' => 'longURL', 'error' => 'notValid');
+		// validate long url
+		if (!preg_match('~^http[s]?://([a-z]+\.){1,2}[a-z]+~i', $this->longUrl)) {
+			$this->error = array('field' => 'longUrl', 'error' => 'notValid');
 			return false;
 		}
 
-		// validate short URL
+		// validate short url
 		return $this->validateShortUrl();
 	}
 
@@ -97,9 +97,9 @@ class UrlCreateForm extends AbstractPage {
 	 * @return bool
 	 */
 	protected function validateShortUrl() {
-		$longURL = $this->urlShortener->expandURL($this->shortURL);
-		if ($longURL) {
-			$this->error = array('field' => 'shortURL', 'error' => 'taken', 'url' => $longURL);
+		$longUrl = $this->urlShortener->expandUrl($this->shortUrl);
+		if ($longUrl) {
+			$this->error = array('field' => 'shortUrl', 'error' => 'taken', 'url' => $longUrl);
 			return false;
 		}
 
@@ -110,10 +110,10 @@ class UrlCreateForm extends AbstractPage {
 	 * Saves the form.
 	 */
 	protected function save() {
-		$shortURL = $this->urlShortener->createUrl($this->longURL, $this->shortURL, $this->expire, $this->details, $this->protect);
+		$shortUrl = $this->urlShortener->createUrl($this->longUrl, $this->shortUrl, $this->expire, $this->details, $this->protect);
 
-		$this->show('urlSaved', $shortURL);
-		$this->longURL = $this->shortURL = $this->details = '';
+		$this->show('urlSaved', $shortUrl);
+		$this->longUrl = $this->shortUrl = $this->details = '';
 		$this->expire = 0;
 		$this->protect = false;
 	}

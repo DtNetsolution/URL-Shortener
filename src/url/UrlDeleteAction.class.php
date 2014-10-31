@@ -2,7 +2,7 @@
 require_once BASE_DIR . 'src/AbstractPage.class.php';
 
 /**
- * Deletes URL mappings.
+ * Deletes a short url.
  *
  * @author    Magnus Kühn
  * @copyright 2013-2014 Magnus Kühn

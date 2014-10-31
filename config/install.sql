@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS application (
   PRIMARY KEY (applicationID)
 );
 
-CREATE TABLE IF NOT EXISTS url_map (
+CREATE TABLE IF NOT EXISTS short_url (
   shortUrlID    INT UNSIGNED     NOT NULL AUTO_INCREMENT,
   applicationID INT              NOT NULL,
   shortUrl      VARCHAR(50)      NOT NULL,
@@ -21,5 +21,5 @@ CREATE TABLE IF NOT EXISTS url_map (
   UNIQUE INDEX (applicationID, shortUrl)
 );
 
-ALTER TABLE url_map ADD FOREIGN KEY (applicationID) REFERENCES application (applicationID)
+ALTER TABLE short_url ADD FOREIGN KEY (applicationID) REFERENCES application (applicationID)
   ON DELETE CASCADE;

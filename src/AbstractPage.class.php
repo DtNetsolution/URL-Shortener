@@ -1,5 +1,5 @@
 <?php
-require_once BASE_DIR . 'src/URLShortener.class.php';
+require_once BASE_DIR . 'src/UrlShortener.class.php';
 
 /**
  * Abstract implementation for pages.
@@ -9,7 +9,7 @@ require_once BASE_DIR . 'src/URLShortener.class.php';
  */
 abstract class AbstractPage {
 	/**
-	 * @var URLShortener
+	 * @var UrlShortener
 	 */
 	protected $urlShortener = null;
 
@@ -17,7 +17,7 @@ abstract class AbstractPage {
 	 * Initializes the form.
 	 */
 	public function __construct() {
-		$this->urlShortener = new URLShortener();
+		$this->urlShortener = new UrlShortener();
 		$this->urlShortener->loadApplication();
 	}
 

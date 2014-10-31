@@ -2,7 +2,7 @@
 require_once BASE_DIR . 'src/AbstractPage.class.php';
 
 /**
- * Lists URL mappings.
+ * Lists short urls.
  *
  * @author    Magnus Kühn
  * @copyright 2013-2014 Magnus Kühn
@@ -52,6 +52,6 @@ class UrlListPage extends AbstractPage {
 	 * Reads data for the page.
 	 */
 	protected function readData() {
-		$this->urls = $this->urlShortener->getURLs($this->sortField, ($this->sortField == 'createdTime' ? 'DESC' : 'ASC'));
+		$this->urls = $this->urlShortener->getUrls($this->sortField, ($this->sortField == 'createdTime' ? 'DESC' : 'ASC'));
 	}
 }

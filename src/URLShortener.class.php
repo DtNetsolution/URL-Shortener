@@ -1,12 +1,12 @@
 <?php
 
 /**
- * Database abstraction layer for the table `url_map`.
+ * Main class for the url shortener.
  *
  * @author    Magnus Kühn
  * @copyright 2013-2014 Magnus Kühn
  */
-class URLShortener {
+class UrlShortener {
 	/**
 	 * @var PDO
 	 */
@@ -27,7 +27,7 @@ class URLShortener {
 	protected $application = array();
 
 	/**
-	 * Initializes the URL shortener.
+	 * Initializes the url shortener.
 	 */
 	public function __construct() {
 		$databaseHost = $databaseDB = $databaseUser = $databasePassword = '';
@@ -57,7 +57,7 @@ class URLShortener {
 	 * @return null|string[]
 	 */
 	public function getUrlMapping($shortUrlID) {
-		$sql = "SELECT * FROM url_map WHERE applicationID = " . $this->application['applicationID'] . " AND shortUrlID = " . $shortUrlID . " LIMIT 1";
+		$sql = "SELECT * FROM short_url WHERE applicationID = " . $this->application['applicationID'] . " AND shortUrlID = " . $shortUrlID . " LIMIT 1";
 		$statement = $this->db->query($sql);
 		return $statement->fetch();
 	}
@@ -65,30 +65,30 @@ class URLShortener {
 	/**
 	 * Expands a shortened url into the full one.
 	 *
-	 * @param string $shortURL
+	 * @param string $shortUrl
 	 * @return string
 	 */
-	public function expandURL($shortURL) {
-		$sql = "SELECT longURL FROM url_map WHERE applicationID = " . $this->application['applicationID'] . " AND shortURL = " . $this->db->quote($shortURL) . " LIMIT 1";
+	public function expandUrl($shortUrl) {
+		$sql = "SELECT longUrl FROM short_url WHERE applicationID = " . $this->application['applicationID'] . " AND shortUrl = " . $this->db->quote($shortUrl) . " LIMIT 1";
 		$statement = $this->db->query($sql);
 		$row = $statement->fetch();
 
 		if ($row) {
-			return $row['longURL'];
+			return $row['longUrl'];
 		} else {
 			return null;
 		}
 	}
 
 	/**
-	 * Fetches a list of all URLs.
+	 * Fetches a list of all Urls.
 	 *
 	 * @param string $sortField
 	 * @param string $sortOrder
 	 * @return string[]
 	 */
-	public function getURLs($sortField, $sortOrder) {
-		$sql = "SELECT * FROM url_map WHERE applicationID = " . $this->application['applicationID'] . " ORDER BY " . $sortField . " " . $sortOrder;
+	public function getUrls($sortField, $sortOrder) {
+		$sql = "SELECT * FROM short_url WHERE applicationID = " . $this->application['applicationID'] . " ORDER BY " . $sortField . " " . $sortOrder;
 		$statement = $this->db->query($sql);
 		return $statement->fetchAll();
 	}
@@ -96,42 +96,42 @@ class URLShortener {
 	/**
 	 * Creates an url mapping.
 	 *
-	 * @param string $longURL
-	 * @param string $shortURL
+	 * @param string $longUrl
+	 * @param string $shortUrl
 	 * @param int    $expire
 	 * @param string $details
 	 * @param bool   $protect
 	 * @return string
 	 */
-	public function createUrl($longURL, $shortURL = null, $expire = 0, $details = '', $protect = false) {
-		if (!$shortURL) {
+	public function createUrl($longUrl, $shortUrl = null, $expire = 0, $details = '', $protect = false) {
+		if (!$shortUrl) {
 			do {
-				$shortURL = mt_rand(11111, 99999);
-			} while ($this->expandURL($shortURL));
+				$shortUrl = mt_rand(11111, 99999);
+			} while ($this->expandUrl($shortUrl));
 		}
 
 		$user = (isset($_SERVER['PHP_AUTH_USER']) ? $_SERVER['PHP_AUTH_USER'] : '');
-		$sql = "INSERT INTO url_map (applicationID, longURL, shortURL, creator, createdTime, expire, details, protect) VALUES
-			(" . $this->application['applicationID'] . ", " . $this->db->quote($longURL) . ", " . $this->db->quote($shortURL) . ", " . $this->db->quote($user) . ", " .
+		$sql = "INSERT INTO short_url (applicationID, longUrl, shortUrl, creator, createdTime, expire, details, protect) VALUES
+			(" . $this->application['applicationID'] . ", " . $this->db->quote($longUrl) . ", " . $this->db->quote($shortUrl) . ", " . $this->db->quote($user) . ", " .
 			time() . ", " . ($expire > 0 ? time() + $expire * 24 * 60 * 60 : 'Null') . ", " . $this->db->quote($details) . ", " . ($protect ? 1 : 0) . ")";
 		$this->db->query($sql);
 
-		return self::expandShortURL($shortURL);
+		return self::expandShortUrl($shortUrl);
 	}
 
 	/**
 	 * Updates an url mapping.
 	 *
 	 * @param int    $shortUrlID
-	 * @param string $longURL
-	 * @param string $shortURL
+	 * @param string $longUrl
+	 * @param string $shortUrl
 	 * @param int    $expire
 	 * @param string $details
 	 * @param bool   $protect
 	 * @return string
 	 */
-	public function updateUrl($shortUrlID, $longURL, $shortURL, $expire, $details, $protect) {
-		$sql = "UPDATE url_map SET longUrl = " . $this->db->quote($longURL) . ", shortUrl = " . $this->db->quote($shortURL) . ", details = " . $this->db->quote($details) .
+	public function updateUrl($shortUrlID, $longUrl, $shortUrl, $expire, $details, $protect) {
+		$sql = "UPDATE short_url SET longUrl = " . $this->db->quote($longUrl) . ", shortUrl = " . $this->db->quote($shortUrl) . ", details = " . $this->db->quote($details) .
 			", protect = " . ($protect ? 1 : 0) . " WHERE shortUrlID = " . $shortUrlID;
 		$this->db->query($sql);
 	}
@@ -143,17 +143,17 @@ class URLShortener {
 	 * @return boolean
 	 */
 	public function deleteUrl($shortUrlID) {
-		$sql = "DELETE FROM url_map WHERE applicationID = " . $this->application['applicationID'] . " AND shortUrlID = " . intval($shortUrlID);
+		$sql = "DELETE FROM short_url WHERE applicationID = " . $this->application['applicationID'] . " AND shortUrlID = " . intval($shortUrlID);
 		return (bool)$this->db->exec($sql);
 	}
 
 	/**
-	 * Strips an URL.
+	 * Strips an url.
 	 *
 	 * @param string $url
 	 * @return string
 	 */
-	public function stripURL($url) {
+	public function stripUrl($url) {
 		foreach ($this->stripRegex as $regex) {
 			$url = preg_replace($regex, '', $url);
 		}
@@ -173,10 +173,10 @@ class URLShortener {
 	/**
 	 * Returns the expanded short url.
 	 *
-	 * @param string $shortURL
+	 * @param string $shortUrl
 	 * @return string
 	 */
-	public static function expandShortURL($shortURL) {
-		return SERVICE_BASEURL . '?' . $shortURL;
+	public static function expandShortUrl($shortUrl) {
+		return SERVICE_BASEURL . '?' . $shortUrl;
 	}
 }

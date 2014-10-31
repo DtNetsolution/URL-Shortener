@@ -2,7 +2,7 @@
 require_once BASE_DIR . 'src/AbstractPage.class.php';
 
 /**
- * Redirects based on an URL mapping.
+ * Redirects a short url to its long form.
  *
  * @author    Magnus Kühn
  * @copyright 2013-2014 Magnus Kühn
@@ -11,7 +11,7 @@ class GoAction extends AbstractPage {
 	/**
 	 * @var string
 	 */
-	protected $shortURL = null;
+	protected $shortUrl = null;
 
 	/**
 	 * Runs the page.
@@ -26,11 +26,11 @@ class GoAction extends AbstractPage {
 	 */
 	protected function readParameters() {
 		if (isset($_SERVER['QUERY_STRING'])) {
-			$this->shortURL = $_SERVER['QUERY_STRING'];
+			$this->shortUrl = $_SERVER['QUERY_STRING'];
 		}
 
 		if (isset($_REQUEST['url'])) {
-			$this->shortURL = $_REQUEST['url'];
+			$this->shortUrl = $_REQUEST['url'];
 		}
 	}
 
@@ -38,11 +38,11 @@ class GoAction extends AbstractPage {
 	 * Executes the action.
 	 */
 	protected function execute() {
-		if ($this->shortURL) {
-			$longURL = $this->urlShortener->expandURL($this->shortURL);
-			if ($longURL) {
+		if ($this->shortUrl) {
+			$longUrl = $this->urlShortener->expandUrl($this->shortUrl);
+			if ($longUrl) {
 				header("HTTP/1.1 301 Moved Permanently");
-				header('Location: ' . $longURL);
+				header('Location: ' . $longUrl);
 				exit;
 			}
 		}

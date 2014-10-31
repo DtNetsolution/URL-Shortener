@@ -42,13 +42,13 @@
 						<a href="<?php echo SERVICE_BASEURL; ?>admin/edit.php?id=<?php echo $url['shortUrlID']; ?>"
 						   class="glyphicon glyphicon-pencil" title="Bearbeiten"></a>
 						<a href="<?php echo SERVICE_BASEURL; ?>admin/delete.php?id=<?php echo $url['shortUrlID']; ?>"
-						   data-short-url="<?php echo URLShortener::expandShortURL($url['shortUrl']); ?>"
+						   data-short-url="<?php echo UrlShortener::expandShortUrl($url['shortUrl']); ?>"
 						   class="glyphicon glyphicon-remove" title="L&ouml;schen"></a>
 					</td>
 
 					<td><a href="<?php echo $url['longUrl']; ?>" target="blank"><?php echo $url['longUrl']; ?></a></td>
 					<td class="small-column">
-						<a href="<?php echo URLShortener::expandShortURL($url['shortUrl']); ?>" target="blank">
+						<a href="<?php echo UrlShortener::expandShortUrl($url['shortUrl']); ?>" target="blank">
 							<?php echo $url['shortUrl']; ?>
 						</a>
 					</td>

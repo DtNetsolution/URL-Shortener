@@ -1,6 +1,6 @@
 <html lang="de">
 	<head>
-		<title>SoftwareDEMO URL Shortener</title>
+		<title>URL Shortener</title>
 		<link href="<?php echo SERVICE_BASEURL; ?>assets/css/bootstrap.min.css" rel="stylesheet">
 	</head>
 	<body>
