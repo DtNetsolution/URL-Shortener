@@ -32,6 +32,10 @@ class UserListPage extends AbstractPage {
 	 * Reads data for the page.
 	 */
 	protected function readData() {
-		$this->users = $this->urlShortener->getUsers();
+		$sql = "SELECT  *
+				FROM    user
+				ORDER BY role ASC, username ASC";
+		$statement = $this->urlShortener->getDB()->query($sql);
+		$this->users = $statement->fetchAll();
 	}
 }

@@ -23,11 +23,14 @@ class UrlDeleteAction extends AbstractPage {
 	 */
 	public function execute() {
 		if (!empty($_GET['id'])) {
-			$id = intval($_GET['id']);
-			if (!empty($id) && $this->urlShortener->deleteUrl($id)) {
-				header('Location: ' . SERVICE_BASEURL . 'admin/?deleted');
-				exit;
-			}
+			$sql = "DELETE FROM short_url
+					WHERE   applicationID = " . $this->urlShortener->getApplicationID() . " AND
+							shortUrlID = " . intval(intval($_GET['id'])) . " AND
+							protected = 0";
+			$this->urlShortener->getDB()->query($sql);
+
+			header('Location: ' . SERVICE_BASEURL . 'admin/?deleted');
+			exit;
 		}
 	}
 }

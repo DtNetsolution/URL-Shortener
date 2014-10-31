@@ -52,6 +52,12 @@ class UrlListPage extends AbstractPage {
 	 * Reads data for the page.
 	 */
 	protected function readData() {
-		$this->urls = $this->urlShortener->getUrls($this->sortField, ($this->sortField == 'createdTime' ? 'DESC' : 'ASC'));
+		$sql = "SELECT  short_url.*, user.username as creator
+				FROM    short_url
+				JOIN    user ON user.userID = short_url.userID
+				WHERE   applicationID = " . $this->urlShortener->getApplicationID() . "
+				ORDER BY " . $this->sortField . " " . ($this->sortField == 'createdTime' ? 'DESC' : 'ASC');
+		$statement = $this->urlShortener->getDB()->query($sql);
+		$this->urls = $statement->fetchAll();
 	}
 }

@@ -25,7 +25,13 @@ class UrlEditForm extends UrlCreateForm {
 	public function run() {
 		// read mapping
 		if (isset($_REQUEST['id'])) {
-			$this->urlMapping = $this->urlShortener->getShortUrl(intval($_REQUEST['id']));
+			$sql = "SELECT  *
+					FROM    short_url
+					WHERE   applicationID = " . $this->urlShortener->getApplicationID() . " AND
+							shortUrlID = " . intval($_REQUEST['id']) . "
+					LIMIT 1";
+			$statement = $this->urlShortener->getDB()->query($sql);
+			$this->urlMapping = $statement->fetch();
 		}
 
 		// redirect to create if invalid
@@ -61,7 +67,11 @@ class UrlEditForm extends UrlCreateForm {
 	 * Saves the form.
 	 */
 	protected function save() {
-		$this->urlShortener->updateUrl($this->urlMapping['shortUrlID'], $this->longUrl, $this->shortUrl, $this->expire, $this->details, $this->protected);
+		$sql = "UPDATE short_url SET longUrl = " . $this->urlShortener->getDB()->quote($this->longUrl) . ", shortUrl = " .
+			$this->urlShortener->getDB()->quote($this->shortUrl) . ", expire = " . $this->expire . ", details = " . $this->urlShortener->getDB()->quote($this->details) .
+			", protected = " . ($this->protected ? 1 : 0) . " WHERE shortUrlID = " . $this->urlMapping['shortUrlID'];
+		$this->urlShortener->getDB()->query($sql);
+
 		$this->show('urlUpdated', UrlShortener::expandShortUrl($this->shortUrl));
 	}
 }

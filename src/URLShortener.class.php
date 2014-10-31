@@ -72,15 +72,6 @@ class UrlShortener {
 	}
 
 	/**
-	 * Returns the user role
-	 *
-	 * @return string
-	 */
-	public function getRole() {
-		return (isset($this->user['role']) ? $this->user['role'] : 'user');
-	}
-
-	/**
 	 * Loads the current application.
 	 */
 	public function loadApplication() {
@@ -96,15 +87,39 @@ class UrlShortener {
 	}
 
 	/**
-	 * Fetches a short url.
+	 * Returns the database.
 	 *
-	 * @param int $shortUrlID
-	 * @return null|string[]
+	 * @return \PDO
 	 */
-	public function getShortUrl($shortUrlID) {
-		$sql = "SELECT * FROM short_url WHERE applicationID = " . $this->application['applicationID'] . " AND shortUrlID = " . $shortUrlID . " LIMIT 1";
-		$statement = $this->db->query($sql);
-		return $statement->fetch();
+	public function getDB() {
+		return $this->db;
+	}
+
+	/**
+	 * Returns the user id.
+	 *
+	 * @return int
+	 */
+	public function getUserID() {
+		return $this->user['userID'];
+	}
+
+	/**
+	 * Returns the user role
+	 *
+	 * @return string
+	 */
+	public function getRole() {
+		return $this->user['role'];
+	}
+
+	/**
+	 * Returns the application id.
+	 *
+	 * @return int
+	 */
+	public function getApplicationID() {
+		return $this->application['applicationID'];
 	}
 
 	/**
@@ -119,77 +134,6 @@ class UrlShortener {
 		$row = $statement->fetch();
 
 		return ($row ? $row['longUrl'] : null);
-	}
-
-	/**
-	 * Fetches a list of all urls.
-	 *
-	 * @param string $sortField
-	 * @param string $sortOrder
-	 * @return string[]
-	 */
-	public function getUrls($sortField, $sortOrder) {
-		$sql = "SELECT  short_url.*, user.username as creator
-				FROM    short_url
-				JOIN    user ON user.userID = short_url.userID
-				WHERE   applicationID = " . $this->application['applicationID'] . "
-				ORDER BY " . $sortField . " " . $sortOrder;
-		$statement = $this->db->query($sql);
-		return $statement->fetchAll();
-	}
-
-	/**
-	 * Creates a new short url.
-	 *
-	 * @param string $longUrl
-	 * @param string $shortUrl
-	 * @param int    $expire
-	 * @param string $details
-	 * @param bool   $protected
-	 * @return string
-	 */
-	public function createUrl($longUrl, $shortUrl = null, $expire = 0, $details = '', $protected = false) {
-		if (!$shortUrl) {
-			do {
-				$shortUrl = mt_rand(11111, 99999);
-				return $shortUrl;
-			} while ($this->expandUrl($shortUrl));
-		}
-
-		$sql = "INSERT INTO short_url (applicationID, longUrl, shortUrl, userID, createdTime, expire, details, protected) VALUES
-			(" . $this->application['applicationID'] . ", " . $this->db->quote($longUrl) . ", " . $this->db->quote($shortUrl) . ", " . $this->db->quote($this->user['userID']) .
-			", " . time() . ", " . ($expire > 0 ? $expire : 'Null') . ", " . $this->db->quote($details) . ", " . ($protected ? 1 : 0) . ")";
-		$this->db->query($sql);
-
-		return self::expandShortUrl($shortUrl);
-	}
-
-	/**
-	 * Updates a short url.
-	 *
-	 * @param int    $shortUrlID
-	 * @param string $longUrl
-	 * @param string $shortUrl
-	 * @param int    $expire
-	 * @param string $details
-	 * @param bool   $protected
-	 */
-	public function updateUrl($shortUrlID, $longUrl, $shortUrl, $expire, $details, $protected) {
-		$sql = "UPDATE short_url SET longUrl = " . $this->db->quote($longUrl) . ", shortUrl = " . $this->db->quote($shortUrl) . ", expire = " . $expire .
-			", details = " . $this->db->quote($details) . ", protected = " . ($protected ? 1 : 0) . " WHERE shortUrlID = " . $shortUrlID;
-		$this->db->query($sql);
-	}
-
-	/**
-	 * Deletes a short url.
-	 *
-	 * @param integer $shortUrlID
-	 * @return boolean
-	 */
-	public function deleteUrl($shortUrlID) {
-		$sql = "DELETE FROM short_url WHERE applicationID = " . $this->application['applicationID'] . " AND shortUrlID = " . intval($shortUrlID) . " AND protected = 0";
-		$statement = $this->db->query($sql);
-		return $statement->rowCount() > 0;
 	}
 
 	/**
@@ -213,15 +157,6 @@ class UrlShortener {
 	 */
 	public function addStripRegex($regex) {
 		$this->stripRegex[] = $regex;
-	}
-
-	/**
-	 * Fetches a list of all users.
-	 */
-	public function getUsers() {
-		$sql = "SELECT * FROM user ORDER BY role ASC, username ASC";
-		$statement = $this->db->query($sql);
-		return $statement->fetchAll();
 	}
 
 	/**

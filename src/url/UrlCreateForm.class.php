@@ -110,9 +110,19 @@ class UrlCreateForm extends AbstractPage {
 	 * Saves the form.
 	 */
 	protected function save() {
-		$shortUrl = $this->urlShortener->createUrl($this->longUrl, $this->shortUrl, $this->expire, $this->details, $this->protected);
+		if (!$this->shortUrl) {
+			do {
+				$shortUrl = mt_rand(11111, 99999);
+			} while ($this->urlShortener->expandUrl($shortUrl));
+		}
 
-		$this->show('urlSaved', $shortUrl);
+		$sql = "INSERT INTO short_url (applicationID, longUrl, shortUrl, userID, createdTime, expire, details, protected) VALUES
+			(" . $this->urlShortener->getApplicationID() . ", " . $this->urlShortener->getDB()->quote($this->longUrl) . ", " . $this->urlShortener->getDB()->quote($this->shortUrl) .
+			", " . $this->urlShortener->getUserID() . ", " . time() . ", " . ($this->expire > 0 ? $this->expire : 'Null') . ", " .
+			$this->urlShortener->getDB()->quote($this->details) . ", " . ($this->protected ? 1 : 0) . ")";
+		$this->urlShortener->getDB()->query($sql);
+
+		$this->show('urlSaved', UrlShortener::expandShortUrl($this->shortUrl));
 		$this->longUrl = $this->shortUrl = $this->details = '';
 		$this->expire = 0;
 		$this->protected = false;
