@@ -12,6 +12,7 @@ class UserDeleteAction extends AbstractPage {
 	 * Runs the page.
 	 */
 	public function run() {
+		$this->checkAdminPermissions();
 		$this->execute();
 
 		header('Location: ' . SERVICE_BASEURL . 'admin/userList.php');
@@ -23,6 +24,12 @@ class UserDeleteAction extends AbstractPage {
 	 */
 	public function execute() {
 		if (!empty($_GET['id'])) {
+			// disallow deleting yourself
+			if (intval($_GET['id']) == $this->urlShortener->getUserID()) {
+				return;
+			}
+
+			// delete user
 			$sql = "DELETE FROM user
 					WHERE   userID = " . intval($_GET['id']);
 			$this->urlShortener->getDB()->query($sql);

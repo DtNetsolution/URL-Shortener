@@ -114,7 +114,7 @@ class UrlShortener {
 	}
 
 	/**
-	 * Returns the user role
+	 * Returns the user role.
 	 *
 	 * @return string
 	 */
