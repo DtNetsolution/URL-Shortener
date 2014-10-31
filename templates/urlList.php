@@ -1,6 +1,7 @@
 <?php
 /** @var $this UrlListPage */
-if (count($this->urls)) { ?>
+if (count($this->urls)) {
+	?>
 	<table class="table table-hover table-condensed">
 		<thead>
 			<tr>
@@ -41,23 +42,18 @@ if (count($this->urls)) { ?>
 				<tr>
 					<td class="small-column"><?php echo $url['shortUrlID']; ?></td>
 					<td class="small-column">
-						<a href="<?php echo SERVICE_BASEURL; ?>admin/urlEdit.php?id=<?php echo $url['shortUrlID']; ?>"
-						   class="glyphicon glyphicon-pencil" title="Bearbeiten"></a>
+						<a href="<?php echo SERVICE_BASEURL; ?>admin/urlEdit.php?id=<?php echo $url['shortUrlID']; ?>" class="glyphicon glyphicon-pencil" title="Bearbeiten"></a>
 
-						<?php if($url['protected']) { ?>
+						<?php if ($url['protected']) { ?>
 							<span class="glyphicon glyphicon-lock" title="Gesch&uuml;tzt"></span>
 						<?php } else { ?>
-							<a href="<?php echo SERVICE_BASEURL; ?>admin/urlDelete.php?id=<?php echo $url['shortUrlID']; ?>"
-							   data-detail="<?php echo UrlShortener::expandShortUrl($url['shortUrl']); ?>"
-							   class="glyphicon glyphicon-remove" title="L&ouml;schen"></a>
+							<a href="<?php echo SERVICE_BASEURL; ?>admin/urlDelete.php?id=<?php echo $url['shortUrlID']; ?>" data-detail="<?php echo UrlShortener::expandShortUrl($url['shortUrl']); ?>" class="glyphicon glyphicon-remove" title="L&ouml;schen"></a>
 						<?php } ?>
 					</td>
 
 					<td><a href="<?php echo $url['longUrl']; ?>" target="blank"><?php echo $url['longUrl']; ?></a></td>
 					<td>
-						<a href="<?php echo UrlShortener::expandShortUrl($url['shortUrl']); ?>" target="blank">
-							<?php echo $url['shortUrl']; ?>
-						</a>
+						<a href="<?php echo UrlShortener::expandShortUrl($url['shortUrl']); ?>" target="blank"><?php echo $url['shortUrl']; ?></a>
 					</td>
 					<td class="small-column"><?php echo $url['creator']; ?></td>
 					<td class="small-column"><?php echo date('Y-m-d H:i:s', $url['createdTime']); ?></td>
@@ -84,4 +80,5 @@ if (count($this->urls)) { ?>
 	</div>
 <?php } else { ?>
 	<p class="text-danger">Es wurden keine URLs verk&uuml;rzt.</p>
-<?php }
+<?php
+}

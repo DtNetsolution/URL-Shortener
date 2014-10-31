@@ -12,11 +12,8 @@
 			<tr>
 				<td class="small-column"><?php echo $user['userID']; ?></td>
 				<td class="small-column">
-					<a href="<?php echo SERVICE_BASEURL; ?>admin/userEdit.php?id=<?php echo $user['userID']; ?>"
-					   class="glyphicon glyphicon-pencil" title="Bearbeiten"></a>
-					<a href="<?php echo SERVICE_BASEURL; ?>admin/userDelete.php?id=<?php echo $user['userID']; ?>"
-					   data-detail="<?php echo $user['username']; ?>"
-					   class="glyphicon glyphicon-remove" title="L&ouml;schen"></a>
+					<a href="<?php echo SERVICE_BASEURL; ?>admin/userEdit.php?id=<?php echo $user['userID']; ?>" class="glyphicon glyphicon-pencil" title="Bearbeiten"></a>
+					<a href="<?php echo SERVICE_BASEURL; ?>admin/userDelete.php?id=<?php echo $user['userID']; ?>" data-detail="<?php echo $user['username']; ?>" class="glyphicon glyphicon-remove" title="L&ouml;schen"></a>
 				</td>
 
 				<td><?php echo $user['username']; ?></td>

@@ -1,5 +1,5 @@
 <?php /** @var $this UrlEditForm */ ?>
-<form action="<?php echo SERVICE_BASEURL.'admin/'.($this->action == 'create' ? 'urlCreate.php' : 'urlEdit.php?id='.$this->urlMapping['shortUrlID']); ?>" method="post" class="form-horizontal">
+<form action="<?php echo SERVICE_BASEURL . 'admin/' . ($this->action == 'create' ? 'urlCreate.php' : 'urlEdit.php?id=' . $this->urlMapping['shortUrlID']); ?>" method="post" class="form-horizontal">
 	<fieldset>
 		<legend>Allgemeine Informationen</legend>
 
@@ -10,11 +10,12 @@
 				<input type="text" id="longUrl" name="longUrl" value="<?php echo $this->longUrl; ?>" required="required"
 				       autofocus="autofocus" class="form-control"/>
 				<?php if ($this->error['field'] == 'longUrl') { ?>
-					<span class="help-block">Bitte geben Sie eine g&uuml;lltige URL wie zum Beispiel
-					<a href="http://google.de/">http://google.de/</a> oder <a href="http://www.softwaredemo.com/">softwaredemo.com</a> ein.
-				</span>
+					<div class="help-block">Bitte geben Sie eine g&uuml;lltige URL wie zum Beispiel
+						<a href="http://google.de/">http://google.de/</a> oder
+						<a href="http://www.softwaredemo.com/">softwaredemo.com</a> ein.
+					</div>
 				<?php } else { ?>
-					<span class="help-block">Geben Sie die URL ein, die Sie verk&uuml;rzen m&ouml;chten.</span>
+					<div class="help-block">Geben Sie die URL ein, die Sie verk&uuml;rzen m&ouml;chten.</div>
 				<?php } ?>
 			</div>
 		</div>
@@ -25,15 +26,15 @@
 				<div class="row">
 					<div class="col-lg-4 control-label" style="width: auto;"><?php echo SERVICE_BASEURL; ?></div>
 					<div class="col-lg-6">
-						<input type="text" id="shortUrl" name="shortUrl" value="<?php echo $this->shortUrl; ?>"
-						       class="form-control"/>
+						<input type="text" id="shortUrl" name="shortUrl" value="<?php echo $this->shortUrl; ?>" class="form-control"/>
 					</div>
 				</div>
 				<?php if ($this->error['field'] == 'shortUrl' && $this->error['error'] == 'taken') { ?>
-					<span class="help-block">Diese kurze URL wird bereits f&uuml;r <a
-							href="<?php echo $this->error['url']; ?>"><?php echo $this->error['url']; ?></a> verwendet.</span>
+					<div class="help-block">Diese kurze URL wird bereits f&uuml;r
+						<a href="<?php echo $this->error['url']; ?>"><?php echo $this->error['url']; ?></a> verwendet.
+					</div>
 				<?php } else { ?>
-					<span class="help-block">Geben Sie die gew&uuml;nschte kurze URL ein.</span>
+					<div class="help-block">Geben Sie die gew&uuml;nschte kurze URL ein.</div>
 				<?php } ?>
 			</div>
 		</div>
@@ -54,21 +55,23 @@
 			<div class="col-lg-10">
 				<div class="radio">
 					<label>
-						<input type="radio" name="expire" value="0"<?php if(!$this->expire) echo '  checked="checked"'; ?>/> Nicht automatisch l&ouml;schen
+						<input type="radio" name="expire" value="0"<?php if (!$this->expire) echo '  checked="checked"'; ?>/> Nicht automatisch l&ouml;schen
 					</label>
 				</div>
 				<div class="radio">
 					<label>
-						<input type="radio" name="expire" value="<?php echo time() + 7*24*60*60; if($this->expire == 7) echo '  checked="checked"'; ?>"/> In sieben Tagen automatisch l&ouml;schen
+						<input type="radio" name="expire" value="<?php echo time() + 7 * 24 * 60 * 60;
+						if ($this->expire == 7) echo '  checked="checked"'; ?>"/> In sieben Tagen automatisch l&ouml;schen
 					</label>
 				</div>
 				<div class="radio">
 					<label>
-						<input type="radio" name="expire" value="<?php echo time() + 31*24*60*60; if($this->expire == 31) echo '  checked="checked"'; ?>"/> In 31 Tagen automatisch l&ouml;schen
+						<input type="radio" name="expire" value="<?php echo time() + 31 * 24 * 60 * 60;
+						if ($this->expire == 31) echo '  checked="checked"'; ?>"/> In 31 Tagen automatisch l&ouml;schen
 					</label>
 				</div>
 
-				<?php if($this->action == 'edit' && $this->expire) { ?>
+				<?php if ($this->action == 'edit' && $this->expire) { ?>
 					<div class="radio">
 						<label>
 							<input type="radio" name="expire" value="<?php echo $this->expire; ?>" checked="checked"/> Am <?php echo date('d.m.Y', $this->expire); ?> automatisch l&ouml;schen
@@ -88,7 +91,7 @@
 			<div class="col-lg-offset-2 col-lg-10">
 				<div class="checkbox">
 					<label>
-						<input type="checkbox" name="protected"<?php if($this->protected) echo ' checked="checked"'; ?>/> Diesen Eintrag sch&uuml;tzen
+						<input type="checkbox" name="protected"<?php if ($this->protected) echo ' checked="checked"'; ?>/> Diesen Eintrag sch&uuml;tzen
 					</label>
 				</div>
 			</div>

@@ -20,7 +20,7 @@ if (isset($_POST['databaseHost']) && isset($_POST['databaseDB']) && isset($_POST
 		$pdo->exec('INSERT INTO application (domainHost, domainPath) VALUES ("' . $_POST['domainHost'] . '", "' . $_POST['domainPath'] . '")');
 
 		// create user
-		$pdo->exec('INSERT INTO user (username, password, role) VALUES ("' . $_POST['username'] . '", "' . crypt($_POST['password']) .'", "admin")');
+		$pdo->exec('INSERT INTO user (username, password, role) VALUES ("' . $_POST['username'] . '", "' . crypt($_POST['password']) . '", "admin")');
 
 		// write config
 		file_put_contents(BASE_DIR . 'config/config.php', '<?php
@@ -62,36 +62,28 @@ $databasePassword = \'' . $_POST['databasePassword'] . '\';');
 						<label for="databaseHost" class="col-lg-2 control-label">Datenbank Host</label>
 
 						<div class="col-lg-4">
-							<input type="text" id="databaseHost" name="databaseHost"
-							       value="<?php if (isset($_POST['databaseHost'])) echo $_POST['databaseHost']; ?>"
-							       required="required" autofocus="autofocus" class="form-control"/>
+							<input type="text" id="databaseHost" name="databaseHost" value="<?php if (isset($_POST['databaseHost'])) echo $_POST['databaseHost']; ?>" required="required" autofocus="autofocus" class="form-control"/>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="databaseDB" class="col-lg-2 control-label">Datenbankname</label>
 
 						<div class="col-lg-4">
-							<input type="text" id="databaseDB" name="databaseDB"
-							       value="<?php if (isset($_POST['databaseDB'])) echo $_POST['databaseDB']; ?>"
-							       required="required" class="form-control"/>
+							<input type="text" id="databaseDB" name="databaseDB" value="<?php if (isset($_POST['databaseDB'])) echo $_POST['databaseDB']; ?>" required="required" class="form-control"/>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="databaseUser" class="col-lg-2 control-label">Datenbank User</label>
 
 						<div class="col-lg-4">
-							<input type="text" id="databaseUser" name="databaseUser"
-							       value="<?php if (isset($_POST['databaseUser'])) echo $_POST['databaseUser']; ?>"
-							       required="required" class="form-control"/>
+							<input type="text" id="databaseUser" name="databaseUser" value="<?php if (isset($_POST['databaseUser'])) echo $_POST['databaseUser']; ?>" required="required" class="form-control"/>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="databasePassword" class="col-lg-2 control-label">Datenbank Passwort</label>
 
 						<div class="col-lg-4">
-							<input type="password" id="databasePassword" name="databasePassword"
-							       value="<?php if (isset($_POST['databasePassword'])) echo $_POST['databasePassword']; ?>"
-							       required="required" class="form-control"/>
+							<input type="password" id="databasePassword" name="databasePassword" value="<?php if (isset($_POST['databasePassword'])) echo $_POST['databasePassword']; ?>" required="required" class="form-control"/>
 						</div>
 					</div>
 				</fieldset>
@@ -102,26 +94,18 @@ $databasePassword = \'' . $_POST['databasePassword'] . '\';');
 						<label for="domainHost" class="col-lg-2 control-label">Domain Host</label>
 
 						<div class="col-lg-4">
-							<input type="text" id="domainHost" name="domainHost"
-							       value="<?php if (isset($_POST['domainHost'])) echo $_POST['domainHost']; ?>"
-							       required="required" class="form-control"/>
+							<input type="text" id="domainHost" name="domainHost" value="<?php if (isset($_POST['domainHost'])) echo $_POST['domainHost']; ?>" required="required" class="form-control"/>
 
-							<div class="help-block">Geben Sie hier den Domain Host wie z.B. "www.google.de" oder
-								"go.dtnet.de" ein.
-							</div>
+							<div class="help-block">Geben Sie hier den Domain Host wie z.B. "www.google.de" oder "go.dtnet.de" ein.</div>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="domainPath" class="col-lg-2 control-label">Domain Path</label>
 
 						<div class="col-lg-4">
-							<input type="text" id="domainPath" name="domainPath"
-							       value="<?php if (isset($_POST['domainPath'])) echo $_POST['domainPath']; ?>"
-							       required="required" class="form-control"/>
+							<input type="text" id="domainPath" name="domainPath" value="<?php if (isset($_POST['domainPath'])) echo $_POST['domainPath']; ?>" required="required" class="form-control"/>
 
-							<div class="help-block">Geben Sie hier den Domain Pfad mit abschlie&szlig;enden Schr&auml;gstrich
-								ein, wie z.B. "/" oder "/url-shortener/".
-							</div>
+							<div class="help-block">Geben Sie hier den Domain Pfad mit abschlie&szlig;enden Schr&auml;gstrich ein, wie z.B. "/" oder "/url-shortener/".</div>
 						</div>
 					</div>
 				</fieldset>
@@ -132,18 +116,14 @@ $databasePassword = \'' . $_POST['databasePassword'] . '\';');
 						<label for="username" class="col-lg-2 control-label">Benutzername</label>
 
 						<div class="col-lg-4">
-							<input type="text" id="username" name="username"
-							       value="<?php if (isset($_POST['username'])) echo $_POST['username']; ?>"
-							       required="required" class="form-control"/>
+							<input type="text" id="username" name="username" value="<?php if (isset($_POST['username'])) echo $_POST['username']; ?>" required="required" class="form-control"/>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="password" class="col-lg-2 control-label">Passwort</label>
 
 						<div class="col-lg-4">
-							<input type="password" id="password" name="password"
-							       value="<?php if (isset($_POST['password'])) echo $_POST['password']; ?>"
-							       required="required" class="form-control"/>
+							<input type="password" id="password" name="password" value="<?php if (isset($_POST['password'])) echo $_POST['password']; ?>" required="required" class="form-control"/>
 
 							<div class="help-block">Geben Sie hier das Passwort f&uuml;r den Administor ein.</div>
 						</div>

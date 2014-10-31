@@ -48,7 +48,7 @@
 							<li<?php if ($parameter == 'userList') echo ' class="active"'; ?>>
 								<a href="<?php echo SERVICE_BASEURL; ?>admin/userList.php">Benutzer Auflisten</a>
 							</li>
-						<?php }	?>
+						<?php } ?>
 
 						<li>
 							<a href="<?php echo str_replace('://', '://go:go@', SERVICE_BASEURL); ?>admin/urlCreate.php">Abmelden</a>
