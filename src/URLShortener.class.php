@@ -64,11 +64,20 @@ class UrlShortener {
 
 		// ask for credentials if no user
 		if (!$this->user) {
+			$this->cleanupUrls();
 			header('WWW-Authenticate: Basic realm="URL Shortener Login"');
 			header('HTTP/1.0 401 Unauthorized');
 			echo 'Authentication Required';
 			exit;
 		}
+	}
+
+	/**
+	 * Cleans up old urls.
+	 */
+	protected function cleanupUrls() {
+		$sql = "DELETE FROM short_url WHERE expire <= " . time();
+		$this->db->exec($sql);
 	}
 
 	/**
