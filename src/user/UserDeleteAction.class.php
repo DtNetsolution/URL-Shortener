@@ -12,7 +12,7 @@ class UserDeleteAction extends AbstractPage {
 	 * Runs the page.
 	 */
 	public function run() {
-		$this->checkAdminPermissions();
+		$this->checkPermissions('admin');
 		$this->execute();
 
 		header('Location: ' . SERVICE_BASEURL . 'admin/userList.php');

@@ -47,6 +47,7 @@ class UrlCreateForm extends AbstractPage {
 	 * Runs the page.
 	 */
 	public function run() {
+		$this->checkPermissions();
 		$this->show('header', 'urlCreate');
 
 		if (!empty($_POST)) {

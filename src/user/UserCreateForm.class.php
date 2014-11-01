@@ -37,7 +37,7 @@ class UserCreateForm extends AbstractPage {
 	 * Runs the page.
 	 */
 	public function run() {
-		$this->checkAdminPermissions();
+		$this->checkPermissions('admin');
 		$this->show('header', 'userCreate');
 
 		if (!empty($_POST)) {

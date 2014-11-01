@@ -17,7 +17,7 @@ class UserListPage extends AbstractPage {
 	 * Runs the page.
 	 */
 	public function run() {
-		$this->checkAdminPermissions();
+		$this->checkPermissions('admin');
 		$this->show('header', 'userList');
 
 		$this->readData();
@@ -34,8 +34,8 @@ class UserListPage extends AbstractPage {
 	 */
 	protected function readData() {
 		$sql = "SELECT  *
-				FROM    user
-				ORDER BY role ASC, username ASC";
+			FROM    user
+			ORDER BY role ASC, username ASC";
 		$statement = $this->urlShortener->getDB()->query($sql);
 		$this->users = $statement->fetchAll();
 	}

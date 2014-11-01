@@ -18,7 +18,6 @@ abstract class AbstractPage {
 	 */
 	public function __construct() {
 		$this->urlShortener = new UrlShortener();
-		$this->urlShortener->loadUser();
 		$this->urlShortener->loadApplication();
 	}
 
@@ -45,8 +44,9 @@ abstract class AbstractPage {
 	/**
 	 * Checks if the user has admin permissions
 	 */
-	protected function checkAdminPermissions() {
-		if ($this->urlShortener->getRole() != 'admin') {
+	protected function checkPermissions($role = 'user') {
+		$this->urlShortener->loadUser();
+		if ($role == 'admin' && $this->urlShortener->getRole() != 'admin') {
 			header('Location: ' . SERVICE_BASEURL . 'admin/urlCreate.php');
 			exit;
 		}

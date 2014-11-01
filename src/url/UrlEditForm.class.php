@@ -23,7 +23,7 @@ class UrlEditForm extends UrlCreateForm {
 	 * Runs the page.
 	 */
 	public function run() {
-		// read mapping
+		$this->checkPermissions();
 		if (isset($_REQUEST['id'])) {
 			$sql = "SELECT  *
 					FROM    short_url
