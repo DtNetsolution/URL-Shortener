@@ -79,7 +79,7 @@ class UrlCreateForm extends AbstractPage {
 		// fix long url
 		$this->longUrl = $this->urlShortener->stripUrl(trim($this->longUrl));
 		if (!preg_match('~^http[s]?://~', $this->longUrl)) {
-			$this->longUrl = 'http://' . $this->longUrl;
+			$this->longUrl = 'https://' . $this->longUrl;
 		}
 
 		// validate long url

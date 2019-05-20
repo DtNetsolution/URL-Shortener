@@ -45,6 +45,7 @@ class UrlShortener {
 		$databaseHost = $databaseDB = $databaseUser = $databasePassword = '';
 		include BASE_DIR . 'config/config.php';
 		$this->db = new PDO('mysql:host=' . $databaseHost . ';dbname=' . $databaseDB, $databaseUser, $databasePassword);
+		$this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	}
 
 	/**
@@ -92,7 +93,7 @@ class UrlShortener {
 
 		// store application
 		$this->application = $statement->fetch();
-		define('SERVICE_BASEURL', 'http://' . $this->application['domainHost'] . $this->application['domainPath']);
+		define('SERVICE_BASEURL', 'https://' . $this->application['domainHost'] . $this->application['domainPath']);
 	}
 
 	/**

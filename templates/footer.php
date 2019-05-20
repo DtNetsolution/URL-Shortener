@@ -2,7 +2,7 @@
 		<div class="footer navbar-inverse">
 			<div class="container">
 				<ul class="nav navbar-nav">
-					<li><a href="http://www.dtnet.de/">Copyright 2014 DT Netsolution GmbH</a></li>
+					<li><a href="https://www.dtnet.de/">Copyright 2014 DT Netsolution GmbH</a></li>
 					<li><a href="https://github.com/DtNetsolution/URL-Shortener">GitHub</a></li>
 				</ul>
 			</div>

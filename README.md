@@ -19,8 +19,8 @@ Einrichtung
 2. `URL/admin/setup.php` aufrufen.
 3. Zugangsdaten für die Datenbank eingeben. Der Benutzer muss Tabellen erzeugen können.
 4. Den Domain Host und Pfad eingeben. Beispiel:
-	- `http://go.dtnet.de/`: Host `go.dtnet.de`, Pfad `/`
-	- `http://www.softwaredemo.de/url-shortener/`: Host `www.softwaredemo.de`, Pfad `/url-shortener/`
+	- `https://go.dtnet.de/`: Host `go.dtnet.de`, Pfad `/`
+	- `https://www.softwaredemo.de/url-shortener/`: Host `www.softwaredemo.de`, Pfad `/url-shortener/`
 5. Die Zugangsdaten für den Administrator eingeben. *Passwörter werden selbstverständlich gehasht in der Datenbank gespeichert. Für Konfigurationsmöglichkeiten siehe die PHP-Funktion crypt.*
 6. Das Formular absenden.
 
@@ -33,7 +33,7 @@ Um Benutzern das Anzeigen aller Links ohne Login zu ermöglichen, muss der Wert 
 Automatische Linkbereinigung
 ----------------------------
 
-Nach der Einrichtung können an die Konfiguration reguläre Ausdrücke angehängt werden, mit welchen automatisch die lange URL bereinigt wird. Die regulären Ausdrücke müssen kompatibel zu PHP sein ([PCRE](http://php.net/manual/de/book.pcre.php)). Gefundene Teilstrings werden entfernt.
+Nach der Einrichtung können an die Konfiguration reguläre Ausdrücke angehängt werden, mit welchen automatisch die lange URL bereinigt wird. Die regulären Ausdrücke müssen kompatibel zu PHP sein ([PCRE](https://php.net/manual/de/book.pcre.php)). Gefundene Teilstrings werden entfernt.
 
 Beispiele: (an die Konfiguration `config/config.php` anhängen)
 
@@ -61,9 +61,9 @@ Sollten weitgehende Änderungen erwüscht sein, so können beliebige Tempaltes v
 
 1. Eine Kopie des Templates `templates/header.php` erstellen.
 2. Den Pfad der geladenen CSS-Dateien ändern. Dazu wird das soeben erstellte Template `templates/custom/header.php` angepasst. Beispiel: Ändern von `<link href="<?php echo SERVICE_BASEURL; ?>assets/css/bootstrap.min.css" rel="stylesheet">` in `<link href="<?php echo SERVICE_BASEURL; ?>assets/custom/bootstrap.min.css" rel="stylesheet">`.
-3. Eine neue Variante von [Bootstrap 3.3.0](http://getbootstrap.com/) mit einer der folgenden Möglichkeiten erstellen:
-	- Verwenden Sie den [Customizer](http://getbootstrap.com/customize/).
-	- Downloaden und kompilen Sie Bootstrap selbst. [Dokumentation siehe Bootstrap Seite](http://getbootstrap.com/getting-started/#grunt).
+3. Eine neue Variante von [Bootstrap 3.3.0](https://getbootstrap.com/) mit einer der folgenden Möglichkeiten erstellen:
+	- Verwenden Sie den [Customizer](https://getbootstrap.com/customize/).
+	- Downloaden und kompilen Sie Bootstrap selbst. [Dokumentation siehe Bootstrap Seite](https://getbootstrap.com/getting-started/#grunt).
 
 Lizenz
 ------

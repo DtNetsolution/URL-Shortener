@@ -11,8 +11,8 @@
 				       autofocus="autofocus" class="form-control"/>
 				<?php if ($this->error['field'] == 'longUrl') { ?>
 					<div class="help-block">Bitte geben Sie eine g&uuml;lltige URL wie zum Beispiel
-						<a href="http://google.de/">http://google.de/</a> oder
-						<a href="http://www.softwaredemo.com/">softwaredemo.com</a> ein.
+						<a href="https://google.de/">https://google.de/</a> oder
+						<a href="https://www.softwaredemo.com/">softwaredemo.com</a> ein.
 					</div>
 				<?php } else { ?>
 					<div class="help-block">Geben Sie die URL ein, die Sie verk&uuml;rzen m&ouml;chten.</div>
