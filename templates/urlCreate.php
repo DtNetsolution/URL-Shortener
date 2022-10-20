@@ -24,7 +24,7 @@
 
 			<div class="col-lg-10">
 				<div class="row">
-					<div class="col-lg-4 control-label" style="width: auto;"><?php echo SERVICE_BASEURL; ?></div>
+					<div class="col-lg-4 control-label" style="width: auto;">https:<?php echo SERVICE_BASEURL; ?></div>
 					<div class="col-lg-6">
 						<input type="text" id="shortUrl" name="shortUrl" value="<?php echo $this->shortUrl; ?>" class="form-control"/>
 					</div>

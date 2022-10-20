@@ -93,7 +93,7 @@ class UrlShortener {
 
 		// store application
 		$this->application = $statement->fetch();
-		define('SERVICE_BASEURL', 'https://' . $this->application['domainHost'] . $this->application['domainPath']);
+		define('SERVICE_BASEURL', '//' . $this->application['domainHost'] . $this->application['domainPath']);
 	}
 
 	/**
@@ -176,6 +176,6 @@ class UrlShortener {
 	 * @return string
 	 */
 	public static function expandShortUrl($shortUrl) {
-		return SERVICE_BASEURL . '?' . $shortUrl;
+		return 'https:' . SERVICE_BASEURL . '?' . $shortUrl;
 	}
 }
