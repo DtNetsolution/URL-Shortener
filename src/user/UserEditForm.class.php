@@ -64,7 +64,7 @@ class UserEditForm extends UserCreateForm {
 	 */
 	protected function save() {
 		$sql = "UPDATE user SET username = " . $this->urlShortener->getDB()->quote($this->username) . ", password = " .
-			$this->urlShortener->getDB()->quote($this->password ? crypt($this->password) : $this->user['password']) . ", role = " .
+			$this->urlShortener->getDB()->quote($this->password ? crypt($this->password, '$2y$10$'.bin2hex(openssl_random_pseudo_bytes(22))) : $this->user['password']) . ", role = " .
 			$this->urlShortener->getDB()->quote($this->role) ." WHERE userID = " . $this->user['userID'];
 		$this->urlShortener->getDB()->query($sql);
 

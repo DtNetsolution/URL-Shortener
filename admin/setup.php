@@ -20,7 +20,7 @@ if (isset($_POST['databaseHost']) && isset($_POST['databaseDB']) && isset($_POST
 		$pdo->exec('INSERT INTO application (domainHost, domainPath) VALUES ("' . $_POST['domainHost'] . '", "' . $_POST['domainPath'] . '")');
 
 		// create user
-		$pdo->exec('INSERT INTO user (username, password, role) VALUES ("' . $_POST['username'] . '", "' . crypt($_POST['password']) . '", "admin")');
+		$pdo->exec('INSERT INTO user (username, password, role) VALUES ("' . $_POST['username'] . '", "' . crypt($_POST['password'], '$2y$10$'.bin2hex(openssl_random_pseudo_bytes(22))) . '", "admin")');
 
 		// write config
 		file_put_contents(BASE_DIR . 'config/config.php', '<?php

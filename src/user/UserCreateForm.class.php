@@ -102,7 +102,7 @@ class UserCreateForm extends AbstractPage {
 	 */
 	protected function save() {
 		$sql = "INSERT INTO user (username, password, role) VALUES (" . $this->urlShortener->getDB()->quote($this->username) . ", " .
-			$this->urlShortener->getDB()->quote(crypt($this->password)) . ", " . $this->urlShortener->getDB()->quote($this->role) . ")";
+			$this->urlShortener->getDB()->quote(crypt($this->password, '$2y$10$'.bin2hex(openssl_random_pseudo_bytes(22)))) . ", " . $this->urlShortener->getDB()->quote($this->role) . ")";
 		$this->urlShortener->getDB()->query($sql);
 
 		$this->show('userCreated', $this->username);
