@@ -14,6 +14,11 @@ class GoAction extends AbstractPage {
 	protected $shortUrl = null;
 
 	/**
+	 * @var string
+	 */
+	protected $secretConfirm = false;
+
+	/**
 	 * Runs the page.
 	 */
 	public function run() {
@@ -32,6 +37,10 @@ class GoAction extends AbstractPage {
 		if (isset($_REQUEST['url'])) {
 			$this->shortUrl = $_REQUEST['url'];
 		}
+
+		if (isset($_REQUEST['secretConfirm'])) {
+			$this->secretConfirm = true;
+		}
 	}
 
 	/**
@@ -39,11 +48,20 @@ class GoAction extends AbstractPage {
 	 */
 	protected function execute() {
 		if ($this->shortUrl) {
-			$longUrl = $this->urlShortener->expandUrl($this->shortUrl);
-			if ($longUrl) {
+			$record = $this->urlShortener->fetchData($this->shortUrl);
+			if ($record && $record['longUrl']) {
 				header("HTTP/1.1 301 Moved Permanently");
-				header('Location: ' . $longUrl);
+				header('Location: ' . $record['longUrl']);
 				exit;
+			} else if ($record && $record['secret']) {
+				if ($this->secretConfirm) {
+					$this->urlShortener->deleteById($record['shortUrlID']);
+					$this->show('secretData', $record['secret']);
+				} else {
+					$this->show('secretConfirm');
+				}
+
+				return;
 			}
 		}
 

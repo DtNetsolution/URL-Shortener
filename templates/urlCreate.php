@@ -3,11 +3,11 @@
 	<fieldset>
 		<legend>Allgemeine Informationen</legend>
 
-		<div class="form-group<?php if ($this->error['field'] == 'longUrl') echo ' has-error' ?>">
+		<div class="form-group<?php if ($this->error['field'] == 'content') echo ' has-error' ?>">
 			<label for="longUrl" class="col-lg-2 control-label">Lange URL</label>
 
 			<div class="col-lg-10">
-				<input type="text" id="longUrl" name="longUrl" value="<?php echo $this->longUrl; ?>" required="required"
+				<input type="text" id="longUrl" name="longUrl" value="<?php echo $this->longUrl; ?>" <?php if ($this->secret) echo 'disabled' ?>
 				       autofocus="autofocus" class="form-control"/>
 				<?php if ($this->error['field'] == 'longUrl') { ?>
 					<div class="help-block">Bitte geben Sie eine g&uuml;lltige URL wie zum Beispiel
@@ -19,6 +19,14 @@
 				<?php } ?>
 			</div>
 		</div>
+        <div class="form-group<?php if ($this->error['field'] == 'content') echo ' has-error' ?>">
+            <label for="secret" class="col-lg-2 control-label">Einmaliges Geheimnis</label>
+
+            <div class="col-lg-10">
+                <textarea id="secret" name="secret" rows="3" class="form-control"<?php if ($this->longUrl) echo ' disabled' ?>><?php echo $this->secret; ?></textarea>
+                <div class="help-block">Dieser Text wird dem Anwender genau einmal angezeigt.</div>
+            </div>
+        </div>
 		<div class="form-group<?php if ($this->error['field'] == 'shortUrl') echo ' has-error' ?>">
 			<label for="shortUrl" class="col-lg-2 control-label">Kurze URL</label>
 
@@ -26,7 +34,15 @@
 				<div class="row">
 					<div class="col-lg-4 control-label" style="width: auto;">https:<?php echo SERVICE_BASEURL; ?></div>
 					<div class="col-lg-6">
-						<input type="text" id="shortUrl" name="shortUrl" value="<?php echo $this->shortUrl; ?>" class="form-control"/>
+                        <div class="input-group">
+						    <input type="text" id="shortUrl" name="shortUrl" value="<?php echo $this->shortUrl; ?>" class="form-control"/>
+                            <div class="input-group-btn">
+                                <div class="btn btn-default">
+                                    <span class="glyphicon glyphicon-refresh"></span>
+                                    Zufällig
+                                </div>
+                            </div>
+                        </div>
 					</div>
 				</div>
 				<?php if ($this->error['field'] == 'shortUrl' && $this->error['error'] == 'taken') { ?>

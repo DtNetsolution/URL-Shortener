@@ -147,6 +147,29 @@ class UrlShortener {
 	}
 
 	/**
+	 * Retrieves the data for a shortened url.
+	 *
+	 * @param string $shortUrl
+	 * @return array
+	 */
+	public function fetchData($shortUrl) {
+		$sql = "SELECT * FROM short_url WHERE applicationID = " . $this->application['applicationID'] . " AND shortUrl = " . $this->db->quote($shortUrl) . " LIMIT 1";
+		$statement = $this->db->query($sql);
+
+		return $statement->fetch();
+	}
+
+	public function deleteById($id, $protection = true) {
+		$sql = "DELETE FROM short_url
+					WHERE   applicationID = " . $this->getApplicationID() . " AND
+							shortUrlID = " . $id;
+		if ($protection) {
+			$sql .= " AND protected = 0";
+		}
+		$this->getDB()->query($sql);
+	}
+
+	/**
 	 * Strips an url.
 	 *
 	 * @param string $url

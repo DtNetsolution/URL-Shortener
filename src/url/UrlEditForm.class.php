@@ -42,6 +42,7 @@ class UrlEditForm extends UrlCreateForm {
 
 		// set current values
 		$this->longUrl = $this->urlMapping['longUrl'];
+		$this->secret = $this->urlMapping['secret'];
 		$this->shortUrl = $this->urlMapping['shortUrl'];
 		$this->expire = $this->urlMapping['expire'];
 		$this->details = $this->urlMapping['details'];

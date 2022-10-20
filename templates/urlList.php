@@ -51,7 +51,13 @@ if (count($this->urls)) {
 						<?php } ?>
 					</td>
 
-					<td><a href="<?php echo $url['longUrl']; ?>" target="blank"><?php echo $url['longUrl']; ?></a></td>
+					<td><?php
+                            if ($url['longUrl']) {
+                                echo '<a href="'.$url['longUrl'].'" target="blank">'.$url['longUrl'].'</a>';
+                            } else {
+                                echo '<em>&lt;Geheimnis&gt;</em>';
+                            }
+                            ?></td>
 					<td>
 						<a href="<?php echo UrlShortener::expandShortUrl($url['shortUrl']); ?>" target="blank"><?php echo $url['shortUrl']; ?></a>
 					</td>

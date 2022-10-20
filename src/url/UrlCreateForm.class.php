@@ -16,6 +16,11 @@ class UrlCreateForm extends AbstractPage {
 	/**
 	 * @var string
 	 */
+	protected $secret = '';
+
+	/**
+	 * @var string
+	 */
 	protected $shortUrl = '';
 
 	/**
@@ -63,7 +68,8 @@ class UrlCreateForm extends AbstractPage {
 	 * Reads parameters for the form.
 	 */
 	protected function readParameters() {
-		if (isset($_POST['longUrl'])) $this->longUrl = $_POST['longUrl'];
+		if (isset($_POST['longUrl'])) $this->longUrl = trim($_POST['longUrl']);
+		if (isset($_POST['secret'])) $this->secret = trim($_POST['secret']);
 		if (isset($_POST['shortUrl'])) $this->shortUrl = $_POST['shortUrl'];
 		if (isset($_POST['expire'])) $this->expire = intval($_POST['expire']);
 		if (isset($_POST['details'])) $this->details = $_POST['details'];
@@ -76,16 +82,18 @@ class UrlCreateForm extends AbstractPage {
 	 * @return bool
 	 */
 	protected function validateParameters() {
-		// fix long url
+		// strip long url
 		$this->longUrl = $this->urlShortener->stripUrl(trim($this->longUrl));
-		if (!preg_match('~^http[s]?://~', $this->longUrl)) {
-			$this->longUrl = 'https://' . $this->longUrl;
+
+		// check for content
+		if (!$this->longUrl && !$this->secret) {
+			$this->error = array('field' => 'content');
+			return false;
 		}
 
-		// validate long url
-		if (!preg_match('~^http[s]?://([a-z]+\.){1,2}[a-z]+~i', $this->longUrl)) {
-			$this->error = array('field' => 'longUrl', 'error' => 'notValid');
-			return false;
+		// prepend protocol
+		if ($this->longUrl && !preg_match('~^http[s]?://~', $this->longUrl)) {
+			$this->longUrl = 'https://' . $this->longUrl;
 		}
 
 		// validate short url
@@ -117,8 +125,11 @@ class UrlCreateForm extends AbstractPage {
 			} while ($this->urlShortener->expandUrl($this->shortUrl));
 		}
 
-		$sql = "INSERT INTO short_url (applicationID, longUrl, shortUrl, userID, createdTime, expire, details, protected) VALUES
-			(" . $this->urlShortener->getApplicationID() . ", " . $this->urlShortener->getDB()->quote($this->longUrl) . ", " . $this->urlShortener->getDB()->quote($this->shortUrl) .
+		$longUrl = $this->longUrl ? $this->urlShortener->getDB()->quote($this->longUrl) : 'NULL';
+		$secret = $this->secret ? $this->urlShortener->getDB()->quote($this->secret) : 'NULL';
+
+		$sql = "INSERT INTO short_url (applicationID, longUrl, secret, shortUrl, userID, createdTime, expire, details, protected) VALUES
+			(" . $this->urlShortener->getApplicationID() . ", " . $longUrl . ", " . $secret . ", " . $this->urlShortener->getDB()->quote($this->shortUrl) .
 			", " . $this->urlShortener->getUserID() . ", " . time() . ", " . ($this->expire > 0 ? $this->expire : 'Null') . ", " .
 			$this->urlShortener->getDB()->quote($this->details) . ", " . ($this->protected ? 1 : 0) . ")";
 		$this->urlShortener->getDB()->query($sql);

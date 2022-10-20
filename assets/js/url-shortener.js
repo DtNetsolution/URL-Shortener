@@ -293,4 +293,32 @@
 	$('#remove').click(function() {
 		location.href = lastUrl;
 	});
+
+	const longInput = document.getElementById('longUrl');
+	const secretInput = document.getElementById('secret');
+	const shortUrl = document.getElementById('shortUrl');
+
+	function randomShortURL() {
+		let res = '';
+		const chars = 'AEOUBCDFGHJKLMNPRSTVWXYZ023456789';
+		for (let i = 0; i < 10; i++) {
+			res += chars[Math.floor(Math.random() * chars.length)];
+		}
+
+		shortUrl.value = res;
+	}
+
+	$('#longUrl,#secret').keyup(event => {
+		longInput.disabled = secretInput.value;
+		secretInput.disabled = longInput.value;
+
+		// generate random short url when a secret is given
+		if (secretInput.value && !shortUrl.value) {
+			randomShortURL();
+		}
+	});
+	$('#shortUrl + .input-group-btn').click(event => {
+		event.preventDefault();
+		randomShortURL();
+	});
 })();
