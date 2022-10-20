@@ -24,7 +24,7 @@
 
             <div class="col-lg-10">
                 <textarea id="secret" name="secret" rows="3" class="form-control"<?php if ($this->longUrl) echo ' disabled' ?>><?php echo $this->secret; ?></textarea>
-                <div class="help-block">Dieser Text wird dem Anwender genau einmal angezeigt.</div>
+                <div class="help-block">Geben Sie einen Text ein, den der Anwender genau einmal angezeigt wird.</div>
             </div>
         </div>
 		<div class="form-group<?php if ($this->error['field'] == 'shortUrl') echo ' has-error' ?>">
